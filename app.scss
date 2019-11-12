@@ -1,6 +1,3 @@
-
-@import "@material/list/mdc-list";
-
 @import "@material/icon-button/mdc-icon-button";
 //body
 body {
@@ -15,19 +12,25 @@ body {
 
 //drawer
 @import "@material/drawer/mdc-drawer";
+@import "@material/list/mdc-list";
+
   .mdc-drawer-app-content {
     flex: auto;
     overflow: auto;
     position: relative;
   }
-  
-//top-app-bar
+
+.mdc-drawer--dismissible {
+  position: relative;
+}
+  //top-app-bar
 @import "@material/top-app-bar/mdc-top-app-bar";  
 .app-bar {
   position: absolute;
 }
 
 .mdc-top-app-bar {
+  z-index: 7;
   @include mdc-top-app-bar-fill-color(#AA6378);
 
 }
@@ -78,9 +81,6 @@ body {
   border-color:blanchedalmond;
   
 }
-
-//dialogue
-@import "@material/dialog/mdc-dialog";
 
 //media-screens
 @media screen and (max-width: 800px) {

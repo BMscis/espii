@@ -1,5 +1,6 @@
 //sidebar drawer
 import {MDCDrawer} from "@material/drawer";
+import {MDCList} from '@material/list';
 const drawer = MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
 
 //topbarapp
@@ -44,16 +45,8 @@ import { MDCTextFieldHelperText } from "@material/textfield";
 const tabBar = new MDCTabBar(document.querySelector('.mdc-tab-bar'));
 const buttonRipple = new MDCRipple(document.querySelector('.mdc-button'));
 
-//dialogue
-import {MDCDialog} from '@material/dialog';
-const dialog = new MDCDialog(document.querySelector('.mdc-dialog'));
 
-import {MDCList} from '@material/list';
-const list = new MDCList(document.querySelector('.mdc-dialog .mdc-list'));
 
-dialog.listen('MDCDialog:opened', () => {
-  list.layout();
-});
 
 
 

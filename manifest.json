@@ -1,0 +1,33 @@
+{
+    "short_name": "Mustard",
+    "name": "Purple Mustard",
+    "icons": [
+      {
+        "src": "/img/new-logo-removebg-preview.png",
+        "type": "image/png",
+        "sizes": "200x200"
+      }
+    ],
+    "start_url": "/html/index.html",
+    "background_color": "#414141",
+    "display": "standalone",
+    "scope": "/html/",
+    "theme_color": "#414141",
+
+    "sidebar_action": {
+      "default_icon": "/img/logothumb.png",
+      "default_title": "My sidebar",
+      "default_panel": "/sidebar/panel.html",
+      "open_at_install":true
+    },
+
+    "permissions": ["storage", "tabs"],
+
+    "commands": {
+      "_execute_sidebar_action": {
+        "suggested_key": {
+          "default": "Ctrl+Shift+Y"
+        }
+      }
+    }
+  }

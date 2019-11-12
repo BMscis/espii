@@ -1,0 +1,29 @@
+/*media query*/
+* {
+    box-sizing:border-box;
+  }
+.left{
+    background-color: aliceblue;
+    padding: 20px;
+    float: left;
+    width: 20%;
+}
+.right{
+    background-color: aliceblue;
+    padding: 20px;
+    float: left;
+    width: 20%;
+}
+
+.main {
+    background-color: aquamarine;
+    padding: 20px;
+    float: left;
+    width: 60%;
+    background-position: bottom;
+}
+
+/*use query to add a breakpoint at 800px*/
+@media screen and (max-width:800px) {
+    .left, .main, .right {width:100%;background-position: bottom;}
+}

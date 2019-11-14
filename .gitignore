@@ -1,1 +1,10 @@
 node_modules/
+espii-app/
+espii-app/node_modules
+espii-app/tslint.json
+espii-app/tsconfig.spec.json
+espii-app/tsconfig.json
+espii-app/tsconfig.app.json
+espii-app/karma.conf.js
+espii-app/browserlist
+.vscode/

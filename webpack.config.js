@@ -29,13 +29,13 @@ function materialImporter(url, prev) {
   return {file: url};
 }
 //main app.js/css
-module.exports = [{
-    
+module.exports = [
+  {
   output: {
     filename: 'bundle.js'
   },
-  name: 'amd',
-  entry: ['./app.js','./app.scss'],
+  name: 'profile',
+  entry: ['./app-profile/app.js','./app-profile/app.scss'],
   mode: 'development',
   module: {
     rules: [
@@ -80,8 +80,8 @@ module.exports = [{
   output: {
     filename: 'login.js'
   },
-  name:'intel',
-  entry: ['./gin.js','./gin.scss'],  
+  name:'login',
+  entry: ['./app-login/gin.js','./app-login/gin.scss'],  
   mode: 'development',
   module: {
     rules: [
@@ -122,8 +122,99 @@ module.exports = [{
       }
     ],
   },
-}];
-
-
-
-
+  },
+  {
+  output: {
+    filename: 'user.js'
+  },
+  name:'signup-login',
+  entry: ['./app-signup/er.js','./app-signup/er.scss'],  
+  mode: 'development',
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'user.css'
+            },
+          },
+          {loader: 'extract-loader'},
+          {loader: 'css-loader'},
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [autoprefixer()]
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+                
+              sassOptions: {
+                includePaths: ['./node_modules'],
+              }
+            },
+          }
+        ],
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['@babel/preset-env'],
+        },
+      }
+    ],
+  },
+  },
+  {
+  output: {
+    filename: 'signup.js'
+  },
+  name:'signup',
+  entry: ['./app-signup/up.js','./app-signup/up.scss'],  
+  mode: 'development',
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'signup.css'
+            },
+          },
+          {loader: 'extract-loader'},
+          {loader: 'css-loader'},
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [autoprefixer()]
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+                
+              sassOptions: {
+                includePaths: ['./node_modules'],
+              }
+            },
+          }
+        ],
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['@babel/preset-env'],
+        },
+      }
+    ],
+  },
+  }
+];

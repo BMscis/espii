@@ -1,0 +1,78 @@
+@import "@material/button/mdc-button.scss";
+@import "@material/typography/mdc-typography";
+@import "../common";
+@import "@material/linear-progress/mdc-linear-progress";
+body {
+    background-color: #414141;
+}
+
+.espii-logo {
+    display: block;
+    box-sizing: border-box;
+    margin: 50px auto;
+    width: 150px;
+    height: 150px;
+    padding-top: 80px;
+    fill: currentColor;
+    transition: height .5s ease-in-out .2s,width .5s ease-in-out .2s;
+
+}
+
+.espii-logo:hover{
+    width: 200px;
+    height: 200px;
+}
+ .mdc-button {
+     left: 0;
+     right: 0;
+     width: 300px;
+ }
+
+.mdc-button--raised:not(:disabled),
+.mdc-button--unelevated:not(:disabled) {
+  background-color: #AA6378;
+}
+@supports not (-ms-ime-align: auto) {
+  .mdc-button--raised:not(:disabled),
+.mdc-button--unelevated:not(:disabled) {
+    /* @alternate */
+    background-color: var(--mdc-theme-primary, #AA6378);
+  }
+}
+
+.mdc-button:not(:disabled) {
+    color: white;
+    /* @alternate */
+    color: blanchedalmond;
+  }
+
+form {
+    margin: 16px auto 16px auto;
+    max-width: max-content;
+}
+
+img {
+    margin: auto;
+}
+
+p {
+  padding: 0 50% 0 48%;
+}
+
+.mdc-typography--headline6 {
+  color: wheat;
+  margin: 32px auto;
+}
+
+.mdc-linear-progress {
+  width: 54%;
+  margin: 48px auto 48px auto;
+}
+
+.mdc-linear-progress__bar {
+  width: 20%;
+}
+
+.mdc-linear-progress__bar-inner {
+  border-color: #AA6378;
+}

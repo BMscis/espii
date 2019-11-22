@@ -32,13 +32,15 @@ function materialImporter(url, prev) {
 module.exports = [
   {
   output: {
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
+  context: path.resolve(__dirname,'src'),
   entry: {
-    bundle: ['./app-profile/app.js','./app-profile/app.scss'],
-    login: ['./app-login/gin.js','./app-login/gin.scss'],
-    user: ['./app-signup/er.js','./app-signup/er.scss'],
-    signup: ['./app-signup/up.js','./app-signup/up.scss'],
+    bundle: ['./src/app-profile/app.js','./src/app-profile/app.scss'],
+    login: ['./src/app-login/gin.js','./src/app-login/gin.scss'],
+    user: ['./src/app-signup/er.js','./src/app-signup/er.scss'],
+    signup: ['./src/app-signup/up.js','./src/app-signup/up.scss'],
   },
   mode: 'development',
   module: {

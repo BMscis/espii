@@ -4,10 +4,10 @@
   "description": "\"Web app dev\"",
   "main": "app.scss",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "BMscis",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.7.2",
@@ -20,20 +20,28 @@
     "@material/tab-bar": "^4.0.0",
     "@material/top-app-bar": "^4.0.0",
     "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
+    "csv-loader": "^3.0.2",
+    "express": "^4.17.1",
     "extract-loader": "^3.1.0",
     "fibers": "^4.0.2",
     "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
     "material-components-web": "^4.0.0",
     "normalize.css": "^8.0.1",
     "sass": "^1.23.3",
     "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.9.0",
+    "xml-loader": "^1.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^9.7.1",
-    "postcss-loader": "^3.0.0"
+    "postcss-loader": "^3.0.0",
+    "webpack-merge": "^4.2.2"
   }
 }

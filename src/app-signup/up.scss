@@ -1,8 +1,12 @@
 @import "@material/textfield/mdc-text-field";
 @import "@material/button/mdc-button.scss";
-@import "./common";
+@import "../common";
+@import "@material/linear-progress/mdc-linear-progress";
+@import "@material/typography/mdc-typography";
 
-
+body {
+  background-color: #414141;
+}
 
 .header {
     text-align: center;
@@ -26,7 +30,10 @@
 }
 
 .username,
-.password {
+.password,
+.businessname,
+.email,
+.phonenumber {
   display: block;
   width: 300px;
   margin: 20px auto;
@@ -52,3 +59,16 @@
 .mdc-button:not(:disabled) {
   color: blanchedalmond;
   }
+
+.mdc-linear-progress {
+  width: 54%;
+  margin: 48px auto 48px auto;
+}
+  
+.mdc-linear-progress__bar {
+  width: 40%;
+}
+
+.mdc-linear-progress__bar-inner {
+  border-color: #AA6378;
+}

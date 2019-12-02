@@ -1,25 +1,21 @@
-@import "@material/icon-button/mdc-icon-button";
-//body
-body {
-    display: flex;
-    height: 100vh;
-    background-color:#414141;
-  }
+@import "../common";
 
-@media screen and (max-width:360px) {
-  .body {
-    height: 700px;
-    }
-}
+//body
+
 
 .main-content {
   overflow: auto;
   height: 100%;
 }
 
+.header {
+  text-align: center;
+  width: 80%;
+  margin: auto;
+}
+
 //drawer
-@import "@material/drawer/mdc-drawer";
-@import "@material/list/mdc-list";
+
 
   .mdc-drawer-app-content {
     flex: auto;
@@ -31,7 +27,7 @@ body {
   position: relative;
 }
   //top-app-bar
-@import "@material/top-app-bar/mdc-top-app-bar";  
+
 .app-bar {
   position: absolute;
 }
@@ -44,10 +40,7 @@ body {
 
 
 //tab-bar
-@import "@material/tab-bar/mdc-tab-bar";
-@import "@material/tab-scroller/mdc-tab-scroller";
-@import "@material/tab-indicator/mdc-tab-indicator";
-@import "@material/tab/mdc-tab";
+
 
 .mdc-tab-bar {
   @include mdc-tab-bar-width(800px);
@@ -67,6 +60,8 @@ body {
 
 //popup
 .popup {
+  width: 50%;
+  margin: auto;
   visibility: hidden;
   display: block;
   box-shadow: 0px 11px 15px -7px rgba(255, 255, 255, 0.11), 0px 24px 38px 3px rgba(255, 255, 255, 0.1), 0px 9px 46px 8px rgba(255, 230, 230, 0.1);
@@ -77,8 +72,6 @@ body {
   left:0;
   right: 0;
   background-color: #414141;
-  right: calc(50% - 280px);
-  left: calc(50% - 280px);
   opacity: 0;
   top:150px;
   transition: width .100s ease-in-out;

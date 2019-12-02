@@ -2,7 +2,9 @@
 @import "@material/button/mdc-button.scss";
 @import "../common";
 
-
+body {
+  background-color: #414141;
+}
 
 .header {
     text-align: center;

@@ -1,3 +1,16 @@
+import _ from 'lodash';
+
+if ('serviceWorker' in navigator === false) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js').then(registration => {
+      console.log('SW registered: ', registration);
+    }).catch(registrationError => {
+      console.log('SW registration failed: ', registrationError);
+    });
+  });
+} else {
+  console.log('no service worker detected.')
+}
 //sidebar drawer
 import {MDCDrawer} from "@material/drawer";
 import {MDCList} from '@material/list';
@@ -13,23 +26,27 @@ topAppBar.listen('MDCTopAppBar:nav', () => {
 
 //login popup
 const app = document.getElementById('main_app');
-const pop = document.getElementById('pop');
 const signup_pop = document.getElementById("signup");
-signup_pop.onclick = function () {
+signup_pop.addEventListener("click", e => {
+  const pop = document.getElementById('pop');
+  import(/*webpackChunckName: 'print' */ './logo').then(module => {
+    const logo = module.default;
+    logo();    
+  });
   pop.style.transition = 'visibility 0s ease-in-out, opacity 0.5s ease-in-out';  
   pop.style.visibility = 'visible'
   app.style.opacity = '0.4';
   pop.style.opacity = '0.8';
-};
+});
 
 //cancel
 //cancel
-cancel.onclick = function (){
+const main_content = document.getElementById('main-content');
+main_content.onclick = function (){
   pop.style.transition = 'visibility 0s ease-in-out, opacity 0.5s ease-in-out';  
     pop.style.visibility = 'hidden';
     app.style.opacity = '1';
     pop.style.opacity = '0';
-    
   };
 
 //mdc button

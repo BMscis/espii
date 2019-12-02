@@ -3,6 +3,8 @@ const autoprefixer = require('autoprefixer');
 
 const path = require('path');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 function tryResolve_(url, sourceFilename) {
   // Put require.resolve in a try/catch to avoid node-sass failing with cryptic libsass errors
   // when the importer throws
@@ -31,16 +33,17 @@ function materialImporter(url, prev) {
 //main app.js/css
 module.exports = [
   {
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
-  },
   context: path.resolve(__dirname,'src'),
   entry: {
-    bundle: ['./src/app-profile/app.js','./src/app-profile/app.scss'],
-    login: ['./src/app-login/gin.js','./src/app-login/gin.scss'],
-    user: ['./src/app-signup/er.js','./src/app-signup/er.scss'],
-    signup: ['./src/app-signup/up.js','./src/app-signup/up.scss'],
+    profile: ['./app-profile/app.js','./app-profile/print.js','./app-profile/app.scss'],
+    login: ['./app-login/gin.js','./app-login/gin.scss'],
+    user: ['./app-signup/er.js','./app-signup/er.scss'],
+    signup: ['./app-signup/up.js','./app-signup/up.scss'],
+  },
+  output: {
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname,'dist'),
+    publicPath: '/',
   },
   mode: 'development',
   module: {
@@ -75,12 +78,80 @@ module.exports = [
       },
       {
         test: /\.js$/,
+        includePaths: path.resolve(__dirname,'src'),
         loader: 'babel-loader',
         query: {
           presets: ['@babel/preset-env'],
         },
-      }
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        includePaths: path.resolve(__dirname,'src/img'),
+        loader: 'file-loader',
+        options: {
+          includePaths: ['./src/img/'],
+          name: 'espii_logo',
+        },
+      },
+      {
+        test: /\.(csv|tsv)$/,
+        use: [
+          'csv-loader',
+        ],
+      },
+      {
+        test: /\.xml$/,
+        use: [
+          'xml-loader',
+        ],
+      },
     ],
-  }
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    hot: true,
+  },
+  plugins: [
+
+    new HtmlWebpackPlugin({
+      title: 'Profile',
+      filename: 'index.html',
+      template: './app-profile/arc.html'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'login',
+      filename: 'login.html',
+      template: './app-login/login.html'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'login-signup',
+      filename: 'login-signup.html',
+      template: './app-signup/login-signup.html'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'business-artist',
+      filename: 'business-artist.html',
+      template: './app-signup/business-artist.html'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'business',
+      filename: 'business.html',
+      template: './app-signup/business.html'
+    })
+  ],
+  devtool: 'inline-source-map',
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
   },
 ];

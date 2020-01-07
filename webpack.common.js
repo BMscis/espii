@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-const ManifestPlugin = require('webpack-manifest-plugin');
+//const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
     context: path.resolve(__dirname,'src'),
@@ -18,21 +18,8 @@ module.exports = {
         signup: ['./app-signup/up.js','./app-signup/Aup.js','./app-signup/up.scss'],
     },
     plugins: [
-        new ManifestPlugin(),
+        //new ManifestPlugin(),
         //new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-        new WebpackPwaManifest({
-          name: 'espii club',
-          short_name: 'espiis',
-          description: 'cloud-monitioring platform',
-          background_color: '#414141',
-          crossorigin: 'use-credentials',
-          icons : [
-            {
-            src: path.resolve('src/img/logo_icon.png'),
-            sizes: [96, 128, 192, 256, 384, 512]
-            },
-          ]
-        }),
         new MiniCssExtractPlugin({
           filename: '[name].[hash].css',
           ignoreOrder: false,
@@ -66,6 +53,28 @@ module.exports = {
             title: 'artist',
             filename: 'artist.html',
             template: './app-signup/artist.html'
+          }),
+          new WebpackPwaManifest({
+            name: 'espii club',
+            short_name: 'espiis',
+            description: 'cloud-monitioring platform',
+            background_color: '#414141',
+            crossorigin: 'use-credentials',
+            options : [
+              {
+                orientation: "portrait",
+                display: "standalone",
+                start_url: "espii.club",
+                inject: true,
+                fingerprints: true,
+              }
+            ],
+            icons : [
+              {
+              src: path.resolve('src/img/logo_icon.png'),
+              sizes: [96, 128, 192, 256, 384, 512]
+              },
+            ]
           }),
           new WorkboxPlugin.GenerateSW({
             //these options encourage the ServiceWorker to get there fast

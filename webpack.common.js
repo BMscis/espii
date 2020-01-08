@@ -8,6 +8,7 @@ const webpack = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 //const ManifestPlugin = require('webpack-manifest-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname,'src'),
@@ -20,19 +21,27 @@ module.exports = {
     plugins: [
         //new ManifestPlugin(),
         //new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+        new SWPrecacheWebpackPlugin({
+          cacheId: 'espii-club',
+          dontCacheBustUrlsMatching: /\.\w{8}\./,
+          filename: 'service-worker.js',
+          minify: true,
+          navigateFallback: PUBLIC_PATH + 'index.html',
+          staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
+        }),
         new MiniCssExtractPlugin({
           filename: '[name].[hash].css',
           ignoreOrder: false,
         }),
         new HtmlWebpackPlugin({
-            title: 'Profile',
+            title: 'login',
             filename: 'index.html',
-            template: './app-profile/arc.html'
+            template: './app-login/login.html'
           }),
           new HtmlWebpackPlugin({
-            title: 'login',
-            filename: 'login.html',
-            template: './app-login/login.html'
+            title: 'home',
+            filename: 'home.html',
+            template: './app-profile/arc.html'
           }),
           new HtmlWebpackPlugin({
             title: 'login-signup',
@@ -64,7 +73,7 @@ module.exports = {
               {
                 orientation: "portrait",
                 display: "standalone",
-                start_url: "espii.club",
+                start_url: "./index.html",
                 inject: true,
                 fingerprints: true,
               }

@@ -8,7 +8,7 @@ const webpack = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 //const ManifestPlugin = require('webpack-manifest-plugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+//const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname,'src'),
@@ -21,14 +21,14 @@ module.exports = {
     plugins: [
         //new ManifestPlugin(),
         //new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-        new SWPrecacheWebpackPlugin({
+        /*new SWPrecacheWebpackPlugin({
           cacheId: 'espii-club',
           dontCacheBustUrlsMatching: /\.\w{8}\./,
           filename: 'service-worker.js',
           minify: true,
           navigateFallback: PUBLIC_PATH + 'index.html',
           staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
-        }),
+        }),*/
         new MiniCssExtractPlugin({
           filename: '[name].[hash].css',
           ignoreOrder: false,
@@ -67,6 +67,7 @@ module.exports = {
             name: 'espii club',
             short_name: 'espiis',
             description: 'cloud-monitioring platform',
+            theme_color: '#AA6378',
             background_color: '#414141',
             crossorigin: 'use-credentials',
             options : [

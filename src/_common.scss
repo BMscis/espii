@@ -1,3 +1,5 @@
+@import "./variables";
+
 @import "@material/icon-button/mdc-icon-button";
 
 @import "@material/drawer/mdc-drawer";
@@ -25,16 +27,15 @@ html, body {
     margin: 0;
     padding-top: 0.1px; // Prevent header h1 margin from pushing body down
     display: flex;
-    height: 100%;
-    background-color:#414141;
+    background-color:$mdc-theme-background;
   }
 
   .espii-logo {
     display: block;
     box-sizing: border-box;
     margin: 50px auto;
-    width: 150px;
-    height: 150px;
+    width: 25%;
+    height: 50%;
     padding-top: 80px;
     fill: currentColor;
     transition: height .5s ease-in-out .2s,width .5s ease-in-out .2s;
@@ -42,25 +43,23 @@ html, body {
 }
 
 .espii-logo:hover{
-    width: 200px;
-    height: 200px;
+    width: 60%;
+    height: 60%;
 }
 
 .username,
 .password,
 .businessname,
+.artistname,
 .email,
-.phonenumber {
+.phonenumber,
+.Apassword,
+.artistname,
+.Aemail,
+.Aphonenumber {
   display: block;
   width: 300px;
   margin: 20px auto;
-}
-
-
-@media screen and (max-width:360px) {
-  .body {
-    height: 700px;
-    }
 }
 
 .button-container {
@@ -74,19 +73,7 @@ html, body {
   margin: 3px;
 }
 
-@supports not (-ms-ime-align: auto) {
-.mdc-button--raised:not(:disabled),
-.mdc-button--unelevated:not(:disabled) {
-    /* @alternate */
-  background-color: var(--mdc-theme-primary, #AA6378);
-  }
-}
 
-.mdc-button:not(:disabled) {
-  color: white;
-  /* @alternate */
-  color: blanchedalmond;
-  }
 
 .mdc-button {
   display: block;
@@ -94,13 +81,107 @@ html, body {
   width: 80%;
 }
 
+.mdc-button-icon-size {
+  width: 50%
+}
+
   .mdc-linear-progress__bar-inner {
-    border-color: #AA6378;
     display: block;
     position: relative;
   }
 
   form {
-    margin: 16px auto 16px auto;
+    margin: 5% auto;
     width: 80%;
+}
+
+.material-icons {
+  font-size: 100%;
+}
+
+.mdc-top-app-bar__title {
+  font-size: 80%
+}
+
+//drawer
+.mdc-drawer {
+  width: 30%;
+}
+
+.mdc-drawer-app-content {
+  flex: auto;
+  overflow: auto;
+  position: relative;
+  }
+
+.mdc-drawer--dismissible {
+  position: relative;
+}
+
+.mdc-drawer.mdc-drawer--open:not(.mdc-drawer--closing) + .mdc-drawer-app-content {
+  /* @noflip */
+  margin-left: 0;
+  /* @noflip */
+  margin-right: 0;
+}
+
+.mdc-tab-indicator__content--underline {
+  border-radius: 95%
+}
+
+//popup
+.popup {
+  width: 65%;
+  height: 70%;
+  margin: auto;
+  visibility: hidden;
+  display: flex;
+  box-shadow: 0px 11px 15px -7px rgba(255, 255, 255, 0.11), 0px 24px 38px 3px rgba(255, 255, 255, 0.1), 0px 9px 46px 8px rgba(255, 230, 230, 0.1);
+  z-index: 1;
+  position: absolute;
+  padding-top: 0;
+  padding-bottom: 100px;
+  background-color: #414141;
+  opacity: 0;
+  top:0;
+  transition: width .100s ease-in-out;
+  border-radius: 25px;
+  border-top-width: 4px;
+  border-color:blanchedalmond;
+  left: 0;
+  right: 0;
+}
+
+//top-app-bar
+
+.app-bar {
+  position: absolute;
+}
+
+.mdc-top-app-bar {
+  z-index: 7;
+
+}
+.mdc-top-app-bar--fixed-adjust {
+  padding: 64px;
+  width: 80%;
+  margin: auto;
+}
+
+button {
+  width: 78.935;
+}
+@media screen and (max-width:360px) {
+  .mdc-drawer {
+    position: absolute;
+    width: 100%;
+    top:  56px;
+  }
+  .popup {
+    width: 100%
+  }
+  .mdc-top-app-bar--fixed-adjust {
+    width: 100%;
+    padding: 64px 0;
+  }
 }

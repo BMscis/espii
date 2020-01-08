@@ -1,12 +1,15 @@
 import {MDCTextField} from '@material/textfield';
 
-const username = new MDCTextField(document.querySelector('.username'));
-const password = new MDCTextField(document.querySelector('.password'));
+const email = new MDCTextField(document.querySelector('.Aemail'));
+const phonenumber = new MDCTextField(document.querySelector('.Aphonenumber'));
+const password = new MDCTextField(document.querySelector('.Apassword'));
+
 
 import {MDCRipple} from '@material/ripple';
 
 const cancel = new MDCRipple(document.querySelector('.cancel'));
 const next = new MDCRipple(document.querySelector('.next'));
+
 
 //Icon/LOGO
 window.addEventListener('load', e => {
@@ -21,6 +24,3 @@ window.addEventListener('load', e => {
     });
   };
 });
-
-
-

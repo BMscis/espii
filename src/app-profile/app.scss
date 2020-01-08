@@ -1,84 +1,34 @@
 @import "../common";
 
 //body
-
-
 .main-content {
-  overflow: auto;
+  overflow: hidden;
   height: 100%;
 }
 
 .header {
   text-align: center;
-  width: 80%;
+  width: 65%;
   margin: auto;
 }
 
-//drawer
-
-
-  .mdc-drawer-app-content {
-    flex: auto;
-    overflow: auto;
-    position: relative;
-  }
-
-.mdc-drawer--dismissible {
-  position: relative;
-}
-  //top-app-bar
-
-.app-bar {
-  position: absolute;
-}
-
-.mdc-top-app-bar {
-  z-index: 7;
-  @include mdc-top-app-bar-fill-color(#AA6378);
-
-}
-
-
 //tab-bar
-
-
 .mdc-tab-bar {
-  @include mdc-tab-bar-width(800px);
-  margin: 24px 24px 24px 250px;
+  width: 80%;
+  margin: auto;
   background-position: center;
+  
 }
 
 .mdc-tab {
   @include mdc-tab-ink-color(white);
+  font-size: 80%;
+  padding-left: 64px;
+  padding-right: 64px;
+  width: 20%;
 }
 .mdc-tab-scroller_scroll-area {
   overflow: hidden;
-}
-.mdc-tab-indicator .mdc-tab-indicator__content--underline{
-    border-color: blanchedalmond;
-  }
-
-//popup
-.popup {
-  width: 50%;
-  margin: auto;
-  visibility: hidden;
-  display: block;
-  box-shadow: 0px 11px 15px -7px rgba(255, 255, 255, 0.11), 0px 24px 38px 3px rgba(255, 255, 255, 0.1), 0px 9px 46px 8px rgba(255, 230, 230, 0.1);
-  z-index: 1;
-  position: absolute;
-  padding-top: 0;
-  padding-bottom: 100px;
-  left:0;
-  right: 0;
-  background-color: #414141;
-  opacity: 0;
-  top:150px;
-  transition: width .100s ease-in-out;
-  border-radius: 25px;
-  border-top-width: 4px;
-  border-color:blanchedalmond;
-  
 }
 
 //media-screens

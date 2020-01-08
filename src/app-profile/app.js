@@ -24,18 +24,15 @@ topAppBar.listen('MDCTopAppBar:nav', () => {
   drawer.open = !drawer.open;
 });
 
-//login popup
+//logo popup
 const app = document.getElementById('main_app');
 const signup_pop = document.getElementById("signup");
 signup_pop.addEventListener("click", e => {
   const pop = document.getElementById('pop');
-  import(/*webpackChunckName: 'print' */ './logo').then(module => {
-    const logo = module.default;
-    logo();    
-  });
+  
   pop.style.transition = 'visibility 0s ease-in-out, opacity 0.5s ease-in-out';  
   pop.style.visibility = 'visible'
-  app.style.opacity = '0.4';
+  app.style.opacity = '0.7';
   pop.style.opacity = '0.8';
 });
 
@@ -48,6 +45,21 @@ main_content.onclick = function (){
     app.style.opacity = '1';
     pop.style.opacity = '0';
   };
+
+
+//Icon/LOGO
+window.addEventListener('load', e => {
+  if('load'){
+    import(/*webpackChunckName: 'icon' */ './icon').then(module => {
+      const icon = module.default;
+      icon();  
+    });
+    import(/*webpackChunckName: 'print' */ './logo').then(module => {
+      const logo = module.default;
+      logo();    
+    });
+  };
+});
 
 //mdc button
 import {MDCRipple} from '@material/ripple';

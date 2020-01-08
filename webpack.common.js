@@ -6,7 +6,8 @@ const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
-
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
     context: path.resolve(__dirname,'src'),
@@ -14,11 +15,24 @@ module.exports = {
         profile: ['./app-profile/app.js','./app-profile/app.scss'],
         login: ['./app-login/gin.js','./app-login/gin.scss'],
         user: ['./app-signup/er.js','./app-signup/er.scss'],
-        signup: ['./app-signup/up.js','./app-signup/up.scss'],
+        signup: ['./app-signup/up.js','./app-signup/Aup.js','./app-signup/up.scss'],
     },
     plugins: [
+        new ManifestPlugin(),
         //new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-        new CleanWebpackPlugin(),
+        new WebpackPwaManifest({
+          name: 'espii club',
+          short_name: 'espiis',
+          description: 'cloud-monitioring platform',
+          background_color: '#414141',
+          crossorigin: 'use-credentials',
+          icons : [
+            {
+            src: path.resolve('src/img/logo_icon.png'),
+            sizes: [96, 128, 192, 256, 384, 512]
+            },
+          ]
+        }),
         new MiniCssExtractPlugin({
           filename: '[name].[hash].css',
           ignoreOrder: false,
@@ -47,6 +61,11 @@ module.exports = {
             title: 'business',
             filename: 'business.html',
             template: './app-signup/business.html'
+          }),
+          new HtmlWebpackPlugin({
+            title: 'artist',
+            filename: 'artist.html',
+            template: './app-signup/artist.html'
           }),
           new WorkboxPlugin.GenerateSW({
             //these options encourage the ServiceWorker to get there fast
@@ -92,7 +111,7 @@ module.exports = {
             loader: 'file-loader',
             options: {
               includePaths: ['./src/img/'],
-              name: 'espii_logo',
+              
             },
           },
           {

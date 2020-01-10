@@ -1,4 +1,4 @@
-import _ from 'lodash';
+//import _ from 'lodash';
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -11,6 +11,10 @@ if ('serviceWorker' in navigator) {
 } else {
   console.log('no service worker detected.')
 }
+fetch ( 'https://api.acrcloud.com/v1/acrcloud-monitor-streams/246132/results?access_key=509c244604c01ed8b82e58f9336375c6&date=20200110', {mode: 'cors'} ) . then ( response => { 
+  console.log('fetch status: ',response.status) } ).catch ( err => { 'network error while fetching' } )
+
+
 //sidebar drawer
 import {MDCDrawer} from "@material/drawer";
 import {MDCList} from '@material/list';

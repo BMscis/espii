@@ -18,6 +18,8 @@
 
 @import "@material/linear-progress/mdc-linear-progress";
 @import "@material/typography/mdc-typography";
+
+@import "@material/card/mdc-card";
 html, body {
     height: 100%;
   }
@@ -171,6 +173,51 @@ html, body {
 button {
   width: 78.935;
 }
+//card holder
+.card-holder {
+  width: 85%;
+  height: 80%;
+  margin: auto;
+  padding: 24px;
+  opacity: 0;
+}
+//mdc-card
+.mdc-card {
+  height: 30%;
+  width: 20%;
+  margin: 24px ;
+  float: left;
+}
+
+//mouse-outline scroll
+.mouse-outline {
+  fill: none;
+  stroke: #AA6378;
+  stroke-width: 1;
+}
+
+.scroll {
+  fill: #AA6378;
+  opacity: 1;
+  animation-name: scroll;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  transform-origin: 50% 20.5px;
+  animation-timing-function: cubic-bezier(0.650, -0.350, 0.250, 1.500);
+}
+
+@keyframes scroll {
+0%,20% {
+  transform: translateY(0) scaleY(1);
+}
+
+100% {
+  transform: translateY(36px) scaleY(2);
+  opacity: 0;
+}
+
+}
+//
 @media screen and (max-width:360px) {
   .mdc-drawer {
     position: absolute;

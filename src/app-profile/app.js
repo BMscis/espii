@@ -1,4 +1,5 @@
 //import _ from 'lodash';
+import {arc_cloud} from "./arc"
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -11,10 +12,10 @@ if ('serviceWorker' in navigator) {
 } else {
   console.log('no service worker detected.')
 }
- fetch ( 'https://api.acrcloud.com/v1/acrcloud-monitor-streams/246132/results?access_key=509c244604c01ed8b82e58f9336375c6&date=20200110', {mode: 'no-cors'} )
- .then ( response => { 
- console.log('fetch status: ',response) 
-} ).catch ( err => { 'network error while fetching' } )
+//  fetch ( 'https://api.acrcloud.com/v1/acrcloud-monitor-streams/246132/results?access_key=509c244604c01ed8b82e58f9336375c6&date=20200110', {mode: 'no-cors'} )
+//  .then ( response => { 
+//  console.log('fetch status: ',response) 
+// } ).catch ( err => { 'network error while fetching' } )
 
 //sidebar drawer
 import {MDCDrawer} from "@material/drawer";
@@ -62,6 +63,12 @@ window.addEventListener('load', e => {
       logo();    
     });
   };
+});
+
+const a = document.getElementById('tag');
+
+a.addEventListener('click', e =>{
+  arc_cloud()
 });
 
 //mdc button

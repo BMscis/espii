@@ -15,17 +15,16 @@
     <body>
         <button id = 'cd'>click</button>
         <p id='pe'></p>
-   
-    <?php
-    $your_bucket_name = "ACRCloud Music";
-    $request_url = 'https://api.acrcloud.com/v1/buckets/'.$your_bucket_name.'/channels';
+<?php
+    $project_name = "your_project_name";
+    $account_access_key = 'cd4893be9a208bad';
+    $account_access_secret = 'c296085ded4bc06bd93eb09638e30c09';
+    $request_url = 'https://api.acrcloud.com/v1/monitor-streams?project_name='.$project_name;
     $http_method = 'GET';
-    $http_uri = '/v1/buckets/'.$your_bucket_name.'/channels';
+    $http_uri = "/v1/monitor-streams";
     $timestamp = time();
     $signature_version = '1';
     
-    $account_access_key = 'cd4893be9a208bad';
-    $account_access_secret = '	c296085ded4bc06bd93eb09638e30c09';
 
     $string_to_sign = $http_method . "\n" .
                       $http_uri ."\n" .
@@ -45,6 +44,7 @@
     foreach( $headers as $n => $v ) {
         $headerArr[] = $n .':' . $v;
     }
+
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $request_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -53,4 +53,5 @@
     var_dump($response);
     curl_close($ch);
 ?>
+
     </body>

@@ -1,13 +1,60 @@
+var url = require('url');
+var crypto = require('crypto');
+//npm install request
+var request = require('request');
 
-const but = document.getElementById('cd');
-const list = document.createElement('script');
-const list2 = document.createElement('script');
-const php = ''
-const url = "https://api.acrcloud.com/v1/acrcloud-monitor-streams/246132/results?access_key=c17c66b0e3be50dcb93cb319ac84709c&date=20200208"
-document.body.appendChild(list);
-document.body.appendChild(list2);
-but.addEventListener('click', e => {
+var defaultOptions = {
+  host: 'api.acrcloud.com',
+  endpoint: '/v1/monitor-streams',
+  signature_version: '1',
+  access_key: 'cd4893be9a208bad',
+  access_secret: 'c296085ded4bc06bd93eb09638e30c09'
+};
 
-  list.innerHTML = "<?php $json_string = 'https://api.acrcloud.com/v1/acrcloud-monitor-streams/246132/results?access_key=c17c66b0e3be50dcb93cb319ac84709c&date=20200208';$jsondata = file_get_contents($json_string);$obj = json_decode($jsondata,true);print_r($obj[0]['metadata']['music'][0]['title']); ?>"
+function buildStringToSign(method, uri, accessKey, signatureVersion, timestamp) {
+  return [method, uri, accessKey, signatureVersion, timestamp].join('\n');
+}
 
-})
+function sign(signString, accessSecret) {
+  return crypto.createHmac('sha1', accessSecret)
+    .update(new Buffer(signString, 'utf-8'))
+    .digest().toString('base64');
+}
+
+function add_stream(stream_url, stream_name, project_name, options, cb) {
+
+  var current_data = new Date();
+  var timestamp = current_data.getTime()/1000;
+
+  var stringToSign = buildStringToSign('POST',
+    options.endpoint,
+    options.access_key,
+    options.signature_version,
+    timestamp);
+
+  var signature = sign(stringToSign, options.access_secret);
+
+  var form = {
+    url:stream_url,
+    stream_name:stream_name,
+    project_name:project_name,
+  };
+  var headers = {
+    'access-key': options.access_key, 
+    'signature-version': options.signature_version, 
+    'signature': signature, 
+    'timestamp':timestamp
+  };
+  request.post({
+    url: "https://"+options.host + options.endpoint,
+    method: 'POST',
+    form: form,
+    headers: headers
+  }, cb);
+}
+
+
+add_stream("http://127.0.0.1", "test", "monitor_test", defaultOptions, function (err, httpResponse, body) {
+  if (err) console.log(err);
+  console.log(body);
+});

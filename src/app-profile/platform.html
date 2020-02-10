@@ -1,4 +1,22 @@
-<?php
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1" lang="eng-us">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link href="https://fonts.googleapis.com/css?family=Fascinate+Inline|Fira+Sans|Inconsolata|Modak&display=swap" rel="stylesheet"> 
+            <link name='icon' rel="icon" type="image/icon type">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+
+
+    </head>
+    <title >
+        Cloud Monitoring
+    </title>
+    <body>
+        <button id = 'cd'>click</button>
+        <p id='pe'></p>
+   
+    <?php
     $request_url = "https://api.acrcloud.com/v1/acrcloud-monitor-streams/246132/results?access_key=c17c66b0e3be50dcb93cb319ac84709c&date=20200208/callback";
     $http_method = 'POST';
     $http_uri = '/v1/acrcloud-monitor-stream/c17c66b0e3be50dcb93cb319ac84709c/callback';
@@ -44,4 +62,6 @@
     $response = curl_exec($ch);
     var_dump($response);
     curl_close($ch);
-?>
+    ?>
+    
+    </body>

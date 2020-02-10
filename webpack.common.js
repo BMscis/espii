@@ -13,7 +13,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 module.exports = {
     context: path.resolve(__dirname,'src'),
     entry: {
-        profile: ['./app-profile/app.js','./app-profile/app.scss'],
+        profile: ['./app-profile/arc.js','./app-profile/app.js','./app-profile/app.scss'],
         login: ['./app-login/gin.js','./app-login/gin.scss'],
         user: ['./app-signup/er.js','./app-signup/er.scss'],
         signup: ['./app-signup/up.js','./app-signup/Aup.js','./app-signup/up.scss'],
@@ -62,6 +62,11 @@ module.exports = {
             title: 'artist',
             filename: 'artist.html',
             template: './app-signup/artist.html'
+          }),
+          new HtmlWebpackPlugin({
+            title: 'platform',
+            filename: 'platform.html',
+            template: './app-profile/platform.html'
           }),
           new WebpackPwaManifest({
             name: 'espii club',

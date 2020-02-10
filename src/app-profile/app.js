@@ -1,6 +1,6 @@
 //import _ from 'lodash';
-import {arc_cloud} from "./arc"
 
+import "./arc"
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('service-worker.js').then(registration => {
@@ -63,12 +63,6 @@ window.addEventListener('load', e => {
       logo();    
     });
   };
-});
-
-const a = document.getElementById('tag');
-
-a.addEventListener('click', e =>{
-  arc_cloud()
 });
 
 //mdc button

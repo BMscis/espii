@@ -65,7 +65,7 @@ module.exports = {
           }),
           new HtmlWebpackPlugin({
             title: 'platform',
-            filename: 'platform.html',
+            filename: 'platform.php',
             template: './app-profile/platform.html'
           }),
           new WebpackPwaManifest({

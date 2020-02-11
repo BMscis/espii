@@ -17,10 +17,10 @@
         <p id='pe'></p>
         <?php
         $project_name = 'bms';
-        $channel_id = "246132";
+        $capital = "246132";
         $access_key = "f55485391f5273d274e766c878f73b51";
         $date = "20200211";
-        $request_url = "https://api.acrcloud.com/v1/acrcloud-monitor-streams?project_name='.$project_name";
+        $request_url = "https://api.acrcloud.com/v1/acrcloud-monitor-streams/$capital/results?access_key=$access_key&date=$date;
         $http_method = "GET";
         $http_uri = "/v1/acrcloud-monitor-streams";
         $account_access_key = "cd4893be9a208bad";
@@ -37,7 +37,7 @@
 
             $headerArray = array();
             $headers = array(
-                'access-key' => $access_key,
+                'access-key' => $account_access_key,
                 'timestamp' => $timestamp,
                 'signature-version' => '1',
                 'signature' => $signature

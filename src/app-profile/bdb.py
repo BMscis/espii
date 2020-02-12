@@ -10,6 +10,7 @@ import base64
 import hashlib
 import requests
 import traceback
+import datetime
 
 reload(sys)
 sys.setdefaultencoding("utf8")
@@ -279,6 +280,8 @@ if __name__ == "__main__":
     #result_type: "realtime" or "delay"
     print(ams) 
     ams.set_result_callback("bms", "https://espii.club/platform.php", False, "json", "realtime")
+    date_time = datetime.date.today()
+    date = date_time.strftime("%Y%m%d")
     print(ams.channel_results("bms", "246132", "20200211"))
 
     """

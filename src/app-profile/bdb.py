@@ -277,7 +277,8 @@ if __name__ == "__main__":
     #send_noresult: True or False
     #post_data_type: "json" or "form"
     #result_type: "realtime" or "delay"
-    ams.print ams.set_result_callback("bms", "https://espii.club/platform.php", False, "json", "realtime")
+    print(ams) 
+    ams.set_result_callback("bms", "https://espii.club/platform.php", False, "json", "realtime")
 
     """
     project_name = "<your project name>"

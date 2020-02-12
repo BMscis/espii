@@ -279,7 +279,7 @@ if __name__ == "__main__":
     #result_type: "realtime" or "delay"
     print(ams) 
     ams.set_result_callback("bms", "https://espii.club/platform.php", False, "json", "realtime")
-    print(ams.channel_results("bms", "246132", str(time.time())))
+    print(ams.channel_results("bms", "246132", "20200211"))
 
     """
     project_name = "<your project name>"

@@ -282,7 +282,7 @@ if __name__ == "__main__":
     ams.set_result_callback("bms", "https://espii.club/platform.php", False, "json", "realtime")
     date_time = datetime.date.today()
     date = date_time.strftime("%Y%m%d")
-    print(ams.channel_results("bms", "246132", "20200211"))
+    print(ams.channel_results("bms", "246132", date))
 
     """
     project_name = "<your project name>"

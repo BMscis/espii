@@ -281,17 +281,10 @@ if __name__ == "__main__":
     #post_data_type: "json" or "form"
     #result_type: "realtime" or "delay"
     print(ams) 
-    ams.set_result_callback("bms", "https://espii.club/platform.php", False, "json", "realtime")
+    ams.set_result_callback("bms", "https://espii.club/platform.php", False, "form", "realtime")
     date_time = datetime.date.today()
     date = date_time.strftime("%Y%m%d")
-    with open('results.csv', 'w') as csvfile:
-        spamwriter = csv.writer(ams.channel_results("bms", "246132", date),delimeter='u', quotechar='|',quoting=csv.QUOTE_MINIMAL)
-        spamwriter.writerow
-    fname, fcontent = ams.channel_results("bms", "246132", date)
-    if not fname.endswith("failed"):
-        with open(fname, "wb") as wfile:
-            wfile.write(fcontent)
-
+    print(ams.channel_results("bms", "246132", date))
     """
     project_name = "<your project name>"
     print ams.all_project_channels(project_name)

@@ -285,7 +285,12 @@ if __name__ == "__main__":
     date_time = datetime.date.today()
     date = date_time.strftime("%Y%m%d")
     with open('results.csv', 'w') as csvfile:
-        spamwriter = csv.writer(ams.channel_results("bms", "246132", date),delimeter='u')
+        spamwriter = csv.writer(ams.channel_results("bms", "246132", date),delimeter='u', quotechar='|',quoting=csv.QUOTE_MINIMAL)
+        spamwriter.writerow
+    fname, fcontent = ams.channel_results("bms", "246132", date)
+    if not fname.endswith("failed"):
+        with open(fname, "wb") as wfile:
+            wfile.write(fcontent)
 
     """
     project_name = "<your project name>"

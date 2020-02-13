@@ -241,8 +241,9 @@ class Acrcloud_Monitor_Demo:
 
     def channel_results(self, project_name, channel_id, date):
         results = self.api.get_channel_results(project_name, channel_id, date)
-        jresults = json.loads(results)
-        return jresults
+        with open('log.json', 'wb') as json_file:
+            json.dump(results, json_file)
+        
 
     def get_channel_urls(self, channel_id):
         urls = self.api.get_channel_urls(channel_id)
@@ -284,7 +285,7 @@ if __name__ == "__main__":
     ams.set_result_callback("bms", "https://espii.club/platform.php", False, "form", "realtime")
     date_time = datetime.date.today()
     date = date_time.strftime("%Y%m%d")
-    print(ams.channel_results("bms", "246132", date))
+    (ams.channel_results("bms", "246132", date))
     """
     project_name = "<your project name>"
     print ams.all_project_channels(project_name)

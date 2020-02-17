@@ -282,7 +282,7 @@ if __name__ == "__main__":
     #post_data_type: "json" or "form"
     #result_type: "realtime" or "delay"
     print(ams) 
-    ams.set_result_callback("bms", "https://espii.club/platform.php", False, "form", "realtime")
+    ams.set_result_callback("bms", "https://espii.club/platform.php", False, "json", "realtime")
     date_time = datetime.date.today()
     date = date_time.strftime("%Y%m%d")
     (ams.channel_results("bms", "246132", date))

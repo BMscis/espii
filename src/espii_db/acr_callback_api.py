@@ -69,8 +69,10 @@ class Acrcloud_Monitor_API:
             "result_type":result_type,
         }
         r = requests.post(requrl, data=data, headers=headers, verify=True)
-        r.encoding = "utf-8"
-        return r.text
+        #r.encoding = "utf-8"
+        #return r.text
+        with open('calbk.json', 'wb') as json_file:
+            json.dump(results, json_file)
 
     def set_state_callback(self, project_name, state_callback_url, post_data_type="json"):
         requrl = "https://api.acrcloud.com/v1/acrcloud-monitor-streams/projects/state_callback"
@@ -120,8 +122,11 @@ class Acrcloud_Monitor_API:
         headers = self.create_headers(http_uri, http_method, signature_version)
         params = {"project_name":project_name, "date":date}
         r = requests.get(requrl, params=params, headers=headers, verify=True)
-        r.encoding = "utf-8"
-        return r.text
+        #r.encoding = "utf-8"
+        with open('log.json', 'wb') as json_file:
+            json.dump(results, json_file)
+        #return r.text
+        
 
     def get_channel_urls(self, channel_id):
         requrl = "https://api.acrcloud.com/v1/acrcloud-monitor-streams/{0}/urls".format(channel_id)
@@ -241,13 +246,11 @@ class Acrcloud_Monitor_Demo:
 
     def channel_results(self, project_name, channel_id, date):
         results = self.api.get_channel_results(project_name, channel_id, date)
-        with open('log.json', 'wb') as json_file:
-            json.dump(results, json_file)
+      
 
     def res_callback(self,project_name, result_callback_url):
         results = self.set_result_callback(project_name,result_callback_url, send_noresult=False, post_data_type="json", result_type="realtime")
-        with open('calbk.json', 'wb') as json_file:
-            json.dump(results, json_file)
+        
         
 
     def get_channel_urls(self, channel_id):

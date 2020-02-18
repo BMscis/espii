@@ -69,7 +69,7 @@ class Acrcloud_Monitor_API:
             "result_type":result_type,
         }
         r = requests.post(requrl, data=data, headers=headers, verify=True)
-        #r.encoding = "utf-8"
+        r.encoding = "utf-8"
         #return r.text
         with open('calbk.json', 'wb') as json_file:
             json.dump(r, json_file)
@@ -122,7 +122,7 @@ class Acrcloud_Monitor_API:
         headers = self.create_headers(http_uri, http_method, signature_version)
         params = {"project_name":project_name, "date":date}
         r = requests.get(requrl, params=params, headers=headers, verify=True)
-        #r.encoding = "utf-8"
+        r.encoding = "utf-8"
         with open('log.json', 'wb') as json_file:
             json.dump(r, json_file)
         #return r.text

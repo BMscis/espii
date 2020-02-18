@@ -70,9 +70,9 @@ class Acrcloud_Monitor_API:
         }
         r = requests.post(requrl, data=data, headers=headers, verify=True)
         r.encoding = "utf-8"
-        #return r.text
+        print(type(r))
         with open('calbk.json', 'wb') as json_file:
-            json.dump(r, json_file)
+            json_file.writelines(r)
 
     def set_state_callback(self, project_name, state_callback_url, post_data_type="json"):
         requrl = "https://api.acrcloud.com/v1/acrcloud-monitor-streams/projects/state_callback"
@@ -124,7 +124,7 @@ class Acrcloud_Monitor_API:
         r = requests.get(requrl, params=params, headers=headers, verify=True)
         r.encoding = "utf-8"
         with open('log.json', 'wb') as json_file:
-            json.dump(r, json_file)
+            json_file.writelines(r)
         #return r.text
         
 

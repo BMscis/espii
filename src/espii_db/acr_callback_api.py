@@ -123,8 +123,7 @@ class Acrcloud_Monitor_API:
         params = {"project_name":project_name, "date":date}
         r = requests.get(requrl, params=params, headers=headers, verify=True)
         r.encoding = "utf-8"
-        with open('log.json', 'wb') as json_file:
-            json_file.writelines(r)
+        print r.json()
         #return r.text
         
 

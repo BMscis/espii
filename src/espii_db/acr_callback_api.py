@@ -127,7 +127,7 @@ class Acrcloud_Monitor_API:
         r2 = r.json()
         with open('log.json', 'wb') as json_file:
             json.dump(r2, json_file)
-        print(r2[0])
+        print(r2[0]['metadata']['music'][0]['acrid'])
         #return r.text
         
 

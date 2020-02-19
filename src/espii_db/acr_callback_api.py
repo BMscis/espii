@@ -124,7 +124,7 @@ class Acrcloud_Monitor_API:
         r = requests.get(requrl, params=params, headers=headers, verify=True)
         #r.encoding = "utf-8"
         r2 = r.json()
-        print (type(r))
+        print (type(r2))
         #return r.text
         
 

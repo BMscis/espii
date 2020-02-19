@@ -122,8 +122,9 @@ class Acrcloud_Monitor_API:
         headers = self.create_headers(http_uri, http_method, signature_version)
         params = {"project_name":project_name, "date":date}
         r = requests.get(requrl, params=params, headers=headers, verify=True)
-        r.encoding = "utf-8"
-        print r.json()
+        #r.encoding = "utf-8"
+        r2 = r.json()
+        print (type(r))
         #return r.text
         
 

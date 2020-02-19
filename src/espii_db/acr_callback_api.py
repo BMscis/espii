@@ -125,7 +125,8 @@ class Acrcloud_Monitor_API:
         r = requests.get(requrl, params=params, headers=headers, verify=True)
         #r.encoding = "utf-8"
         r2 = r.json()
-        print (r2['metadata'][0]['timestamp_utc'])
+        with open('log.json', 'wb') as json_file:
+            json.dump(r2, json_file)
         #return r.text
         
 

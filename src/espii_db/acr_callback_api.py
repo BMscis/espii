@@ -296,8 +296,8 @@ if __name__ == "__main__":
     #ams.set_result_callback("bms", "https://espii.club/platform.php", False, "form", "realtime")
     date_time = datetime.date.today()
     date = date_time.strftime("%Y%m%d")
-    ams.channel_results("bms", "246132", date)
-    ams.res_callback("bms","https://espii.club/platform.php")
+    ams.channel_results("bald", "246132", date)
+    ams.res_callback("bald","https://espii.club/platform.php")
     """
     project_name = "<your project name>"
     print ams.all_project_channels(project_name)

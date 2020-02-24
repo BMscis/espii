@@ -273,7 +273,7 @@ class Acrcloud_Monitor_Demo:
         fname, content = self.api.get_recording(access_key, channel_id, record_timestamp, played_duration)
         return fname, content
 
-    def get_date_time():
+    def get_date_time(self):
         date_time = datetime.date.today()
         date = date_time.strftime("%Y%m%d")
         

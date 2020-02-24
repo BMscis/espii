@@ -54,7 +54,8 @@ class Espii:
         self.cnx.close()
 
 
-data = open('C:/Users/melvi/log8.json')
-results = json.load(data)
-handler = Espii(results,'root','Meddickmeddick6','monitor_results')
-handler.get_data()
+if __name__ == "__main__":
+    data = open('log.json')
+    results = json.load(data)
+    handler = Espii(results,'root','Meddickmeddick6','monitor_results')
+    handler.get_data()

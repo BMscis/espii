@@ -273,6 +273,12 @@ class Acrcloud_Monitor_Demo:
         fname, content = self.api.get_recording(access_key, channel_id, record_timestamp, played_duration)
         return fname, content
 
+    def get_date_time():
+        date_time = datetime.date.today()
+        date = date_time.strftime("%Y%m%d")
+        
+        return date
+
 if __name__ == "__main__":
     config = {
         "account_access_key" : "cd4893be9a208bad",
@@ -286,7 +292,7 @@ if __name__ == "__main__":
 
     #Set State Callback_URL
     #post_data_type: "json" or "form"
-    ams.set_state_callback("bms", "https://espii.club/platform.php", "json")
+    ams.set_state_callback("bald", "https://espii.club/platform.php", "json")
 
     #Set Result Callback_URL
     #send_noresult: True or False
@@ -294,9 +300,7 @@ if __name__ == "__main__":
     #result_type: "realtime" or "delay"
     #print(ams) 
     #ams.set_result_callback("bms", "https://espii.club/platform.php", False, "form", "realtime")
-    date_time = datetime.date.today()
-    date = date_time.strftime("%Y%m%d")
-    ams.channel_results("bald", "246132", date)
+    ams.channel_results("bald", "246132", ams.get_date_time())
     ams.res_callback("bald","https://espii.club/platform.php")
     """
     project_name = "<your project name>"

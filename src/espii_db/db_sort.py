@@ -6,7 +6,7 @@ from datetime import datetime
 from datetime import timedelta
 from mysql.connector import errorcode
 
-data = open('C:/Users/melvi/log.json')
+data = open('log.json')
 results = json.load(data)
 
 cnx= mysql.connector.connect(user='root', password='Meddickmeddick6',host='127.0.0.1',database="monitor_results")
@@ -26,21 +26,23 @@ for i in range(0, len(results)):
             
             for x in range(0, len(results[i]['metadata']['music'])):
                 get_timestamp = results[i]['metadata']['timestamp_utc']
-                timestamp_date = datetime.strptime(get_timestamp, '%Y-%m-%d %H:%M:%S')
+                timestamp_date = datetime.strptime(str(get_timestamp), '%Y-%m-%d %H:%M:%S')+timedelta(hours=3)
                 timestamp_change = timestamp_date + timedelta(seconds=x)
                 timestamp = datetime.strftime(timestamp_change, '%Y-%m-%d %H:%M:%S')
-                played_duration = str(results[i]['metadata']['played_duration'])+str(x/10)
+                get_played_duration = results[i]['metadata']['played_duration']*1000
+                played_duration = get_played_duration + x
                 acrid = results[i]['metadata']['music'][x]['acrid']
                 score= results[i]['metadata']['music'][x]['score']
-                call_option('time_stamp','timestamp, played_duration, acrid, score',(str(timestamp),str(played_duration),str(acrid),str(score)))
+                call_option('time_stamp','timestamp, played_duration, acrid, score',(str(timestamp_change),str(played_duration),str(acrid),str(score)))
         else:
-            timestamp = results[i]['metadata']['timestamp_utc']
-            played_duration = results[i]['metadata']['played_duration']
+            get_timestamp = results[i]['metadata']['timestamp_utc']
+            timestamp = datetime.strptime(str(get_timestamp), '%Y-%m-%d %H:%M:%S')+timedelta(hours=3)
+            played_duration = results[i]['metadata']['played_duration']*1000
             acrid = results[i]['metadata']['music'][0]['acrid']
             score= results[i]['metadata']['music'][0]['score']
             call_option('time_stamp','timestamp, played_duration, acrid, score',(str(timestamp),str(played_duration),str(acrid),str(score)))
-    except ValueError as e:
-        print(e)
+    except mysql.connector.IntegrityError:
+        continue
 
 cnx.commit()
 cursor.close()

@@ -59,3 +59,4 @@ if __name__ == "__main__":
     results = json.load(data)
     handler = Espii(results,'root','Meddickmeddick6','monitor_results')
     handler.get_data()
+    handler.commit()

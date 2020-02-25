@@ -1,6 +1,6 @@
 from crontab import CronTab
 
-espii_cron = CronTab(user='melvinwafula')
+espii_cron = CronTab(user='root')
 job = espii_cron.new(command='sudo python2 acr_callback_api.py',comment='callback')
 job2 = espii_cron.new(command='sudo python2 db_sort.py',comment='call_database')
 job.minute.every(5)

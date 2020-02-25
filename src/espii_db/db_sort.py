@@ -55,7 +55,8 @@ class Espii:
 
 
 if __name__ == "__main__":
-    data = open('log.json')
+    #data = open('C:/Users/melvi/log9.json')
+    data = open('/var/www/html/espii/src/espii_db/log.json')
     results = json.load(data)
     handler = Espii(results,'root','Meddickmeddick6','monitor_results')
     handler.get_data()

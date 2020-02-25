@@ -72,7 +72,7 @@ class Acrcloud_Monitor_API:
         #r.encoding = "utf-8"
         r2 = r.json()
         print(type(r))
-        with open('calbk.json', 'wb') as json_file:
+        with open('/var/www/html/espii/src/espii_db/calbk.json', 'wb') as json_file:
             json.dump(r2, json_file)
 
     def set_state_callback(self, project_name, state_callback_url, post_data_type="json"):
@@ -125,7 +125,7 @@ class Acrcloud_Monitor_API:
         r = requests.get(requrl, params=params, headers=headers, verify=True)
         #r.encoding = "utf-8"
         r2 = r.json()
-        with open('log.json', 'wb') as json_file:
+        with open('/var/www/html/espii/src/espii_db/log.json', 'wb') as json_file:
             json.dump(r2, json_file)
         print(r2[0]['metadata']['music'][0]['acrid'])
         #return r.text

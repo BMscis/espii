@@ -8,6 +8,7 @@ import {MDCRipple} from '@material/ripple';
 const cancel = new MDCRipple(document.querySelector('.cancel'));
 const next = new MDCRipple(document.querySelector('.next'));
 
+cancel.onclick = function () {console.log('gettit');};
 //Icon/LOGO
 window.addEventListener('load', e => {
   if('load'){
@@ -20,7 +21,10 @@ window.addEventListener('load', e => {
       logo();    
     });
   };
-});
+}
+);
+
+
 
 
 

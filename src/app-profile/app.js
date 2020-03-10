@@ -1,6 +1,9 @@
 //import _ from 'lodash';
 
-import "./arc"
+//import {get_database} from "./arc"
+
+//import "../app-platform/arc"
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('service-worker.js').then(registration => {
@@ -12,10 +15,6 @@ if ('serviceWorker' in navigator) {
 } else {
   console.log('no service worker detected.')
 }
-//  fetch ( 'https://api.acrcloud.com/v1/acrcloud-monitor-streams/246132/results?access_key=509c244604c01ed8b82e58f9336375c6&date=20200110', {mode: 'no-cors'} )
-//  .then ( response => { 
-//  console.log('fetch status: ',response) 
-// } ).catch ( err => { 'network error while fetching' } )
 
 //sidebar drawer
 import {MDCDrawer} from "@material/drawer";
@@ -78,17 +77,6 @@ import { MDCTextFieldHelperText } from "@material/textfield";
 const tabBar = new MDCTabBar(document.querySelector('.mdc-tab-bar'));
 const buttonRipple = new MDCRipple(document.querySelector('.mdc-button'));
 
-//xhr request
-// let xhr = new XMLHttpRequest()
-// xhr.onload = function () {
-//   console.log('loaded request')
-// }
-// xhr.onerror = function (err) {
-//   console.error('failed to load request')
-// }
-
-// xhr.open('GET', 'https://api.acrcloud.com/v1/acrcloud-monitor-streams/246132/results?access_key=509c244604c01ed8b82e58f9336375c6&date=20200110', true )
-// xhr.send()
 
 
 

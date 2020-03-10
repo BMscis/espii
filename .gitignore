@@ -7,4 +7,8 @@ espii-app/tsconfig.json
 espii-app/tsconfig.app.json
 espii-app/karma.conf.js
 espii-app/browserlist
+py.txt
+pyder.txt
+src/app-profile/__pycache__
+src/app-profile/acr.php
 .vscode/

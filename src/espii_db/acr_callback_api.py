@@ -125,7 +125,7 @@ class Acrcloud_Monitor_API:
         r = requests.get(requrl, params=params, headers=headers, verify=True)
         #r.encoding = "utf-8"
         r2 = r.json()
-        with open('/var/www/html/espii/src/espii_db/log.json', 'wb') as json_file:
+        with open('/var/www/html/espii/src/espii_db/{}.json'.format(channel_id), 'wb') as json_file:
             json.dump(r2, json_file)
         print(r2[0]['metadata']['music'][0]['acrid'])
         #return r.text
@@ -242,6 +242,8 @@ class Acrcloud_Monitor_Demo:
             #print "Project:{0}, Total number of channels: {1}".format(project_name, len(stream_list))
         except Exception as e:
             traceback.print_exc()
+        with open('channel_list.json', 'w') as ch:
+            json.dump(stream_list, ch)
         return stream_list
 
     def channel_info(self, channel_id):
@@ -294,14 +296,17 @@ if __name__ == "__main__":
     #post_data_type: "json" or "form"
     ams.set_state_callback("bald", "https://espii.club/platform.php", "json")
 
+    all_channels = ams.all_project_channels("bald")
+
     #Set Result Callback_URL
     #send_noresult: True or False
     #post_data_type: "json" or "form"
     #result_type: "realtime" or "delay"
     #print(ams) 
     #ams.set_result_callback("bms", "https://espii.club/platform.php", False, "form", "realtime")
-    ams.channel_results("bald", "246132", ams.get_date_time())
-    ams.res_callback("bald","https://espii.club/platform.php")
+    for i in all_channels:
+        ams.channel_results("bald", "{}".format(i), ams.get_date_time())
+    #ams.res_callback("bald","https://espii.club/platform.php")
     """
     project_name = "<your project name>"
     print ams.all_project_channels(project_name)

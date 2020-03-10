@@ -5,137 +5,111 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema monitor_results
+-- Schema results
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema monitor_results
+-- Schema results
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `monitor_results` DEFAULT CHARACTER SET utf8 ;
-USE `monitor_results` ;
+CREATE SCHEMA IF NOT EXISTS `results` DEFAULT CHARACTER SET utf8 ;
+USE `results` ;
 
 -- -----------------------------------------------------
--- Table `monitor_results`.`time_stamp`
+-- Table `results`.`time_stamp`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `monitor_results`.`time_stamp` (
+CREATE TABLE IF NOT EXISTS `results`.`time_stamp` (
+  `time_index` INT NOT NULL AUTO_INCREMENT,
   `timestamp` TIMESTAMP(6) NOT NULL,
-  `played_duration` INT NOT NULL,
-  `acrid` VARCHAR(45) NOT NULL,
+  `played_duration` FLOAT NOT NULL,
   `score` INT NOT NULL,
+  `acrid` VARCHAR(45) NOT NULL,
+  UNIQUE INDEX `musiccol_UNIQUE` (`timestamp` ASC),
+  UNIQUE INDEX `index_UNIQUE` (`time_index` ASC),
   PRIMARY KEY (`timestamp`))
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `musiccol_UNIQUE` ON `monitor_results`.`time_stamp` (`timestamp` ASC);
-
 
 -- -----------------------------------------------------
--- Table `monitor_results`.`artist`
+-- Table `results`.`album`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `monitor_results`.`artist` (
-  `idartist` INT NOT NULL AUTO_INCREMENT,
-  `artist_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idartist`))
+CREATE TABLE IF NOT EXISTS `results`.`album` (
+  `album_index` INT NOT NULL AUTO_INCREMENT,
+  `album_name` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`album_name`),
+  UNIQUE INDEX `idalbum_UNIQUE` (`album_index` ASC),
+  UNIQUE INDEX `album_name_UNIQUE` (`album_name` ASC))
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `idartist_UNIQUE` ON `monitor_results`.`artist` (`idartist` ASC);
-
-CREATE UNIQUE INDEX `artist_name_UNIQUE` ON `monitor_results`.`artist` (`artist_name` ASC);
-
 
 -- -----------------------------------------------------
--- Table `monitor_results`.`album`
+-- Table `results`.`artist`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `monitor_results`.`album` (
-  `idalbum` INT NOT NULL AUTO_INCREMENT,
-  `album_name` VARCHAR(45) NOT NULL,
-  `artist_idartist` INT NOT NULL,
-  PRIMARY KEY (`idalbum`),
-  CONSTRAINT `fk_album_artist`
-    FOREIGN KEY (`artist_idartist`)
-    REFERENCES `monitor_results`.`artist` (`idartist`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `results`.`artist` (
+  `artist_index` INT NOT NULL AUTO_INCREMENT,
+  `artist_name` VARCHAR(255) NOT NULL,
+  UNIQUE INDEX `idartist_UNIQUE` (`artist_index` ASC),
+  PRIMARY KEY (`artist_name`),
+  UNIQUE INDEX `artist_name_UNIQUE` (`artist_name` ASC))
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `idalbum_UNIQUE` ON `monitor_results`.`album` (`idalbum` ASC);
-
-CREATE UNIQUE INDEX `album_name_UNIQUE` ON `monitor_results`.`album` (`album_name` ASC);
-
-CREATE INDEX `fk_album_artist_idx` ON `monitor_results`.`album` (`artist_idartist` ASC);
-
 
 -- -----------------------------------------------------
--- Table `monitor_results`.`metadata`
+-- Table `results`.`metadata`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `monitor_results`.`metadata` (
+CREATE TABLE IF NOT EXISTS `results`.`metadata` (
+  `meta_index` INT NOT NULL AUTO_INCREMENT,
   `db_begin_time_offset` INT NOT NULL,
   `db_end_time_offset` INT NOT NULL,
   `duration` INT NOT NULL,
   `play_offset` INT NOT NULL,
   `sample_begin_time_offset` INT NOT NULL,
   `sample_end_time_offset` INT NOT NULL,
-  `time_stamp_timestamp` TIMESTAMP(6) NOT NULL,
-  PRIMARY KEY (`time_stamp_timestamp`),
-  CONSTRAINT `fk_metadata_time_stamp1`
-    FOREIGN KEY (`time_stamp_timestamp`)
-    REFERENCES `monitor_results`.`time_stamp` (`timestamp`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `time_stamp` TIMESTAMP(6) NOT NULL,
+  UNIQUE INDEX `index_UNIQUE` (`meta_index` ASC),
+  PRIMARY KEY (`time_stamp`),
+  UNIQUE INDEX `time_stamp_UNIQUE` (`time_stamp` ASC))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `monitor_results`.`track`
+-- Table `results`.`contributors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `monitor_results`.`track` (
-  `idtrack` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(45) NOT NULL,
-  `genre` VARCHAR(45) NOT NULL,
-  `label` VARCHAR(45) NOT NULL,
-  `release_date` DATE NOT NULL,
-  `album_idalbum` INT NOT NULL,
-  PRIMARY KEY (`idtrack`),
-  CONSTRAINT `fk_track_album1`
-    FOREIGN KEY (`album_idalbum`)
-    REFERENCES `monitor_results`.`album` (`idalbum`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `results`.`contributors` (
+  `comt_index` INT NOT NULL AUTO_INCREMENT,
+  `contributor_name` VARCHAR(255) NOT NULL,
+  UNIQUE INDEX `comp_index_UNIQUE` (`comt_index` ASC),
+  PRIMARY KEY (`contributor_name`))
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `idtrack_UNIQUE` ON `monitor_results`.`track` (`idtrack` ASC);
-
-CREATE INDEX `fk_track_album1_idx` ON `monitor_results`.`track` (`album_idalbum` ASC);
-
 
 -- -----------------------------------------------------
--- Table `monitor_results`.`acrid`
+-- Table `results`.`track`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `monitor_results`.`acrid` (
+CREATE TABLE IF NOT EXISTS `results`.`track` (
+  `track_index` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(255) NOT NULL,
+  `genre` VARCHAR(255) NULL,
+  `label` VARCHAR(255) NULL,
+  `release_date` VARCHAR(255) NULL,
+  `artist_name` VARCHAR(255) NOT NULL,
+  `album_name` VARCHAR(255) NOT NULL,
+  `contributor_name` VARCHAR(255) NOT NULL,
   `acrid` VARCHAR(45) NOT NULL,
-  `track_idtrack` INT NOT NULL,
-  PRIMARY KEY (`track_idtrack`),
-  CONSTRAINT `fk_acrid_track1`
-    FOREIGN KEY (`track_idtrack`)
-    REFERENCES `monitor_results`.`track` (`idtrack`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `idtrack_UNIQUE` (`track_index` ASC),
+  PRIMARY KEY (`acrid`),
+  UNIQUE INDEX `acrid_UNIQUE` (`acrid` ASC))
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `acrid_UNIQUE` ON `monitor_results`.`acrid` (`acrid` ASC);
-
 
 -- -----------------------------------------------------
--- Table `monitor_results`.`composers`
+-- Table `results`.`acr_id`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `monitor_results`.`composers` (
-  `composer_name` VARCHAR(45) NOT NULL,
-  `acrid_track_idtrack` INT NOT NULL,
-  PRIMARY KEY (`acrid_track_idtrack`),
-  CONSTRAINT `fk_composers_acrid1`
-    FOREIGN KEY (`acrid_track_idtrack`)
-    REFERENCES `monitor_results`.`acrid` (`track_idtrack`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `results`.`acr_id` (
+  `acr_index` INT NOT NULL AUTO_INCREMENT,
+  `acrid` VARCHAR(45) NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`acrid`),
+  UNIQUE INDEX `track_idtrack_UNIQUE` (`acr_index` ASC))
 ENGINE = InnoDB;
 
 

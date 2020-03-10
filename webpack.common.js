@@ -13,10 +13,11 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 module.exports = {
     context: path.resolve(__dirname,'src'),
     entry: {
-        profile: ['./app-profile/arc.js','./app-profile/app.js','./app-profile/app.scss'],
+        profile: ['./app-profile/app.js','./app-profile/app.scss'],
         login: ['./app-login/gin.js','./app-login/gin.scss'],
         user: ['./app-signup/er.js','./app-signup/er.scss'],
         signup: ['./app-signup/up.js','./app-signup/Aup.js','./app-signup/up.scss'],
+        platform: ['./app-platform/arc.js','./_common.scss']
     },
     plugins: [
         //new ManifestPlugin(),
@@ -65,8 +66,8 @@ module.exports = {
           }),
           new HtmlWebpackPlugin({
             title: 'platform',
-            filename: 'platform.php',
-            template: './app-profile/platform.html'
+            filename: 'platform.html',
+            template: './app-platform/platform.html'
           }),
           new WebpackPwaManifest({
             name: 'espii club',
@@ -163,5 +164,10 @@ module.exports = {
         },
         },
     },
+    },
+    node: {
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty',
     },
 };

@@ -33,6 +33,7 @@ function materialImporter(url, prev) {
 //main app.js/css
 module.exports = [
   {
+  target: 'node',  
   context: path.resolve(__dirname,'src'),
   entry: {
     profile: ['./app-profile/app.js','./app-profile/print.js','./app-profile/app.scss'],

@@ -300,9 +300,9 @@ if __name__ == "__main__":
     channel_load = json.load(channels)
     channel_list = []
     for i in range(0, len(channel_load)):
-        station_name = channel_load[i]['stream_name']
-        new_station_name = station_name.replace(" ","_")
-        channel_list.append(new_station_name)
+        station_name = channel_load[i]['id']
+        #new_station_name = station_name.replace(" ","_")
+        channel_list.append(station_name)
 
     #Set Result Callback_URL
     #send_noresult: True or False

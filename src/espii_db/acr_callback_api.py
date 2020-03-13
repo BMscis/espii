@@ -313,7 +313,7 @@ if __name__ == "__main__":
     #result_type: "realtime" or "delay"
     #print(ams) 
     #ams.set_result_callback("bms", "https://espii.club/platform.php", False, "form", "realtime")
-    for i in channel_id:
+    for i in range(len(channel_id)):
         ams.channel_results("bald", "{}".format(channel_id[i]),"{}".format(channel_name[i]), ams.get_date_time())
     #ams.res_callback("bald","https://espii.club/platform.php")
     """

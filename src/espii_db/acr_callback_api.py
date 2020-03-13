@@ -297,6 +297,13 @@ if __name__ == "__main__":
     ams.set_state_callback("bald", "https://espii.club/platform.php", "json")
 
     all_channels = ams.all_project_channels("bald")
+    channels = open('channel_list.json')
+    channel_load = json.load(channels)
+    channel_list = []
+    for i in range(0, len(channel_load)):
+        station_name = channel_load[i]['stream_name']
+        new_station_name = station_name.replace(" ","_")
+        channel_list.append(new_station_name)
 
     #Set Result Callback_URL
     #send_noresult: True or False
@@ -304,7 +311,7 @@ if __name__ == "__main__":
     #result_type: "realtime" or "delay"
     #print(ams) 
     #ams.set_result_callback("bms", "https://espii.club/platform.php", False, "form", "realtime")
-    for i in all_channels:
+    for i in channel_list:
         ams.channel_results("bald", "{}".format(i), ams.get_date_time())
     #ams.res_callback("bald","https://espii.club/platform.php")
     """

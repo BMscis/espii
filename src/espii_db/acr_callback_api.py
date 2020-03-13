@@ -114,7 +114,7 @@ class Acrcloud_Monitor_API:
         r.encoding = "utf-8"
         return r.text
 
-    def get_channel_results(self, project_name, channel_id, date):
+    def get_channel_results(self, project_name, channel_id,channel_name, date):
         requrl = "https://api.acrcloud.com/v1/acrcloud-monitor-streams/{0}/results".format(channel_id)
         http_uri = requrl[requrl.find("/v1/"):]
         http_method = "GET"
@@ -125,7 +125,7 @@ class Acrcloud_Monitor_API:
         r = requests.get(requrl, params=params, headers=headers, verify=True)
         #r.encoding = "utf-8"
         r2 = r.json()
-        with open('/var/www/html/espii/src/espii_db/{}.json'.format(channel_id), 'wb') as json_file:
+        with open('/var/www/html/espii/src/espii_db/{}.json'.format(channel_name), 'wb') as json_file:
             json.dump(r2, json_file)
         #return r.text
         
@@ -248,8 +248,8 @@ class Acrcloud_Monitor_Demo:
     def channel_info(self, channel_id):
         return self.api.get_channel_info(channel_id)
 
-    def channel_results(self, project_name, channel_id, date):
-        self.api.get_channel_results(project_name, channel_id, date)
+    def channel_results(self, project_name, channel_id,channel_name, date):
+        self.api.get_channel_results(project_name, channel_id,channel_name, date)
       
 
     def res_callback(self,project_name, result_callback_url):
@@ -298,11 +298,14 @@ if __name__ == "__main__":
     all_channels = ams.all_project_channels("bald")
     channels = open('channel_list.json')
     channel_load = json.load(channels)
-    channel_list = []
+    channel_id = []
+    channel_name = []
     for i in range(0, len(channel_load)):
-        station_name = channel_load[i]['id']
+        station_id = channel_load[i]['id']
+        station_name = channel_load[i]['stream_name']
         #new_station_name = station_name.replace(" ","_")
-        channel_list.append(station_name)
+        channel_id.append(station_id)
+        channel_name.append(station_name)
 
     #Set Result Callback_URL
     #send_noresult: True or False
@@ -310,8 +313,8 @@ if __name__ == "__main__":
     #result_type: "realtime" or "delay"
     #print(ams) 
     #ams.set_result_callback("bms", "https://espii.club/platform.php", False, "form", "realtime")
-    for i in channel_list:
-        ams.channel_results("bald", "{}".format(i), ams.get_date_time())
+    for i in channel_id:
+        ams.channel_results("bald", "{}".format(channel_id[i]),"{}".format(channel_name[i]), ams.get_date_time())
     #ams.res_callback("bald","https://espii.club/platform.php")
     """
     project_name = "<your project name>"

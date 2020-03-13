@@ -303,9 +303,9 @@ if __name__ == "__main__":
     for i in range(0, len(channel_load)):
         station_id = channel_load[i]['id']
         station_name = channel_load[i]['stream_name']
-        #new_station_name = station_name.replace(" ","_")
+        new_station_name = station_name.replace(" ","_")
         channel_id.append(station_id)
-        channel_name.append(station_name)
+        channel_name.append(new_station_name)
 
     #Set Result Callback_URL
     #send_noresult: True or False

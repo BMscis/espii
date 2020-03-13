@@ -127,6 +127,7 @@ class Acrcloud_Monitor_API:
         r2 = r.json()
         with open('/var/www/html/espii/src/espii_db/{}.json'.format(channel_name), 'wb') as json_file:
             json.dump(r2, json_file)
+        print('\033[1;32;40m OK \033[0;37;40m {} database created successfuly'.format(channel_name))
         #return r.text
         
 
@@ -313,8 +314,12 @@ if __name__ == "__main__":
     #result_type: "realtime" or "delay"
     #print(ams) 
     #ams.set_result_callback("bms", "https://espii.club/platform.php", False, "form", "realtime")
-    for i in range(len(channel_id)):
-        ams.channel_results("bald", "{}".format(channel_id[i]),"{}".format(channel_name[i]), ams.get_date_time())
+    try:
+        for i in range(len(channel_id)):
+            ams.channel_results("bald", "{}".format(channel_id[i]),"{}".format(channel_name[i]), ams.get_date_time())
+    except Exception as e:
+        print('\033[1;31;40m ERROR \033[0;37;40m {}'.format(e))
+    
     #ams.res_callback("bald","https://espii.club/platform.php")
     """
     project_name = "<your project name>"

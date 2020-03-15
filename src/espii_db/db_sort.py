@@ -385,7 +385,7 @@ class Espii:
         print('\033[1;32;40m OK \033[0;37;40m data has been commited')
 
 if __name__ == "__main__":
-    print(f'process id of __main__ {os.getpid()}')
+    #print(f'process id of __main__ {os.getpid()}')
     #data = open('/var/www/html/espii/src/espii_db/log.json')
     if platform.platform()[0:5] == "Linux":
         channels = open('/var/www/html/espii/src/espii_db/channel_list.json')

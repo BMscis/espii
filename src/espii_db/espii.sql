@@ -104,7 +104,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `results`.`acr_id`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `results`.`acr_id` (
+CREATE TABLE IF NOT EXISTS`acr_id` (
   `acr_index` INT NOT NULL AUTO_INCREMENT,
   `acrid` VARCHAR(45) NOT NULL,
   `title` VARCHAR(255) NOT NULL,

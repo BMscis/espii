@@ -131,7 +131,7 @@ class Espii:
         for table_name in TABLES:
             table_description = TABLES[table_name]
             try:
-                print('\033[1;32;40m Creating table \033[0;37;40m{}'.format(table_name), end='')
+                print('\033[1;32;40m Creating table \033[0;37;40m{}'.format(table_name))
                 self.cursor.execute(table_description)
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:

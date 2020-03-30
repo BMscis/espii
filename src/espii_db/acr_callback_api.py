@@ -127,7 +127,7 @@ class Acrcloud_Monitor_API:
         r2 = r.json()
         with open('/var/www/html/espii/src/espii_db/{}.json'.format(channel_name), 'wb') as json_file:
             json.dump(r2, json_file)
-        print('\033[1;32;40m OK \033[0;37;40m {} database created successfuly'.format(channel_name))
+        print('\033[1;32;40m OK \033[0;37;40m {} channel created successfuly'.format(channel_name))
         #return r.text
         
 

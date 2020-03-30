@@ -284,7 +284,7 @@ class Acrcloud_Monitor_Demo:
 if __name__ == "__main__":
     config = {
         "account_access_key" : "906ec84f17280273",
-        "account_access_secret" : "	ba39546718bf3e8ae69c21866050b2cf",
+        "account_access_secret" : "ba39546718bf3e8ae69c21866050b2cf",
     }
 
     ams = Acrcloud_Monitor_Demo(config)
@@ -313,7 +313,7 @@ if __name__ == "__main__":
     #post_data_type: "json" or "form"
     #result_type: "realtime" or "delay"
     #print(ams) 
-    #ams.set_result_callback("bms", "https://espii.club/platform.php", False, "form", "realtime")
+    #ams.set_result_callback("bms", "https://espii.club/platform.html", False, "form", "realtime")
     try:
         for i in range(len(channel_id)):
             ams.channel_results("bald", "{}".format(channel_id[i]),"{}".format(channel_name[i]), ams.get_date_time())

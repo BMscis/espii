@@ -10,7 +10,7 @@ from multiprocessing import Process
 from mysql.connector import errorcode
 from mysql.connector import errorcode
 
-logging.basicConfig(level=10, format='%(asctime)s %(levelname)s %(message)s')
+logging.basicConfig(filename='/var/log/espii/espii_db.log'level=10, format='%(asctime)s %(levelname)s %(message)s')
 class Espii:
 
     def __init__(self, user,password,channel_id):

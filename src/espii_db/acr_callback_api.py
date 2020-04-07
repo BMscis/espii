@@ -17,7 +17,7 @@ import traceback
 
 reload(sys)
 sys.setdefaultencoding("utf8")
-logging.basicConfig(level=10, format='%(asctime)s %(levelname)s %(message)s')
+logging.basicConfig(filename='/var/log/espii/acr.log,level=10', format='%(asctime)s %(levelname)s %(message)s')
 
 """
 This demo shows how to use the RESTful API to operate ACRCloud Broadcast Database Monitoring(project, channel, results)

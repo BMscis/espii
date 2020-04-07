@@ -8,6 +8,7 @@ import time
 import hmac
 import json
 import base64
+import logging
 import hashlib
 import requests
 import datetime
@@ -16,6 +17,7 @@ import traceback
 
 reload(sys)
 sys.setdefaultencoding("utf8")
+logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s')
 
 """
 This demo shows how to use the RESTful API to operate ACRCloud Broadcast Database Monitoring(project, channel, results)
@@ -71,7 +73,6 @@ class Acrcloud_Monitor_API:
         r = requests.post(requrl, data=data, headers=headers, verify=True)
         #r.encoding = "utf-8"
         r2 = r.json()
-        print(type(r))
         with open('/var/www/html/espii/src/espii_db/calbk.json', 'wb') as json_file:
             json.dump(r2, json_file)
 
@@ -127,7 +128,7 @@ class Acrcloud_Monitor_API:
         r2 = r.json()
         with open('/var/www/html/espii/src/espii_db/{}.json'.format(channel_name), 'wb') as json_file:
             json.dump(r2, json_file)
-        print('\033[1;32;40m OK \033[0;37;40m {} channel created successfuly'.format(channel_name))
+        logging.info('\033[1;32;40m OK \033[0;37;40m {} channel created successfuly'.format(channel_name))
         #return r.text
         
 
@@ -312,13 +313,13 @@ if __name__ == "__main__":
     #send_noresult: True or False
     #post_data_type: "json" or "form"
     #result_type: "realtime" or "delay"
-    #print(ams) 
+    #logging.debug(ams) 
     #ams.set_result_callback("bms", "https://espii.club/platform.html", False, "form", "realtime")
     try:
         for i in range(len(channel_id)):
             ams.channel_results("bald", "{}".format(channel_id[i]),"{}".format(channel_name[i]), ams.get_date_time())
     except Exception as e:
-        print('\033[1;31;40m ERROR \033[0;37;40m {}'.format(e))
+        logging.debug('\033[1;31;40m ERROR \033[0;37;40m {}'.format(e))
     
     #ams.res_callback("bald","https://espii.club/platform.php")
     """

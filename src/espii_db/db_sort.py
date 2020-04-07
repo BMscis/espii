@@ -10,7 +10,7 @@ from multiprocessing import Process
 from mysql.connector import errorcode
 from mysql.connector import errorcode
 
-logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s')
+logging.basicConfig(level=10, format='%(asctime)s %(levelname)s %(message)s')
 class Espii:
 
     def __init__(self, user,password,channel_id):
@@ -115,7 +115,7 @@ class Espii:
         
         try:
             self.cursor.execute(create_database)
-            logging.info('{} created successfuly'.format(DB_NAME))
+            logging.debug('{} created successfuly'.format(DB_NAME))
 
         except mysql.connector.IntegrityError as err:
             logging.debug('ERROR  {}'.format(err))
@@ -125,7 +125,7 @@ class Espii:
         try:
             self.cnx = mysql.connector.connect(user=self.user, password=self.password,host='127.0.0.1',database=DB_NAME)
             self.cursor = self.cnx.cursor(buffered=True)
-            logging.info('{} connected successfuly'.format(DB_NAME))
+            logging.debug('{} connected successfuly'.format(DB_NAME))
         except mysql.connector.Error as err:
             logging.debug('ERROR  {}'.format(err))
             exit(1)
@@ -133,15 +133,15 @@ class Espii:
         for table_name in TABLES:
             table_description = TABLES[table_name]
             try:
-                logging.info('Creating table {}'.format(table_name))
+                logging.debug('Creating table {}'.format(table_name))
                 self.cursor.execute(table_description)
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-                    logging.warning('already exists')
+                    logging.debug('already exists')
                 else:
                     logging.debug(err.msg)
             else:
-                logging.info('{} table created successfuly'.format(table_name))
+                logging.debug('{} table created successfuly'.format(table_name))
 
     def execute_mysql (self,i,table_name, columns,values,cursor):
         if type(values) == tuple :
@@ -150,7 +150,7 @@ class Espii:
             add_data="INSERT INTO %s(%s) VALUES(%s)" %(table_name,columns,values)
         cursor.execute(add_data)
         #cursor = 0
-        logging.info('{} OK {}'.format(i,add_data))
+        logging.debug('{} OK {}'.format(i,add_data))
     def search_mysql (self,query_column,table_name, anchor_column, value,cursor):
         search_data="SELECT %s FROM %s WHERE %s = \"%s\"" % (query_column,table_name,anchor_column,value)
         #val = "%s" % value
@@ -384,7 +384,7 @@ class Espii:
         self.cnx.commit()
         self.cursor.close()
         self.cnx.close()
-        logging.info(' data has been commited')
+        logging.debug(' data has been commited')
 
 if __name__ == "__main__":
     #print(f'process id of __main__ {os.getpid()}')

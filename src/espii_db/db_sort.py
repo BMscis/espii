@@ -115,33 +115,33 @@ class Espii:
         
         try:
             self.cursor.execute(create_database)
-            logging.debug('{} created successfuly'.format(DB_NAME))
+            logging.info('{} created successfuly'.format(DB_NAME))
 
         except mysql.connector.IntegrityError as err:
-            logging.debug('ERROR  {}'.format(err))
+            logging.error('ERROR  {}'.format(err))
             exit(1)
 
         #use_database = "USE {}".format(DB_NAME)
         try:
             self.cnx = mysql.connector.connect(user=self.user, password=self.password,host='127.0.0.1',database=DB_NAME)
             self.cursor = self.cnx.cursor(buffered=True)
-            logging.debug('{} connected successfuly'.format(DB_NAME))
+            logging.info('{} connected successfuly'.format(DB_NAME))
         except mysql.connector.Error as err:
-            logging.debug('ERROR  {}'.format(err))
+            logging.error('ERROR  {}'.format(err))
             exit(1)
 
         for table_name in TABLES:
             table_description = TABLES[table_name]
             try:
-                logging.debug('Creating table {}'.format(table_name))
+                logging.info('Creating table {}'.format(table_name))
                 self.cursor.execute(table_description)
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
                     logging.debug('already exists')
                 else:
-                    logging.debug(err.msg)
+                    logging.error(err.msg)
             else:
-                logging.debug('{} table created successfuly'.format(table_name))
+                logging.info('{} table created successfuly'.format(table_name))
 
     def execute_mysql (self,i,table_name, columns,values,cursor):
         if type(values) == tuple :
@@ -150,7 +150,7 @@ class Espii:
             add_data="INSERT INTO %s(%s) VALUES(%s)" %(table_name,columns,values)
         cursor.execute(add_data)
         #cursor = 0
-        logging.debug('{} OK {}'.format(i,add_data))
+        logging.info('{} OK {}'.format(i,add_data))
     def search_mysql (self,query_column,table_name, anchor_column, value,cursor):
         search_data="SELECT %s FROM %s WHERE %s = \"%s\"" % (query_column,table_name,anchor_column,value)
         #val = "%s" % value
@@ -286,7 +286,7 @@ class Espii:
 
                     self.execute_mysql(i,'acr_id','acrid, title',(acrid,title),self.cursor)
             except mysql.connector.IntegrityError as w:
-                logging.debug('ERROR {} {}'.format(i,w))
+                logging.error('ERROR {} {}'.format(i,w))
                 continue
     def send_album_name (self):
         for i in range(0, len(self.json_data)):
@@ -296,9 +296,9 @@ class Espii:
                     try:
                         self.execute_mysql(i,'album','album_name',album,self.cursor)
                     except mysql.connector.errors.IntegrityError  as e :
-                        logging.debug('ERROR {} {}'.format(i,e))
+                        logging.error('ERROR {} {}'.format(i,e))
             except mysql.connector.errors.ProgrammingError as w:
-                logging.debug('ERROR {} {}'.format(i,w))                  
+                logging.error('ERROR {} {}'.format(i,w))                  
     def send_timestamp_data (self):
         for i in range(0, len(self.json_data)):
             try:
@@ -311,7 +311,7 @@ class Espii:
 
                     self.execute_mysql(i,'time_stamp','timestamp, played_duration, score, acrid',(str(timestamp),played_duration,score,acrid),self.cursor)
             except mysql.connector.IntegrityError as w:
-                logging.debug('ERROR {} {}'.format(i,w))
+                logging.error('ERROR {} {}'.format(i,w))
                 continue
     def send_metadata (self):
         for i in range(0, len(self.json_data)):
@@ -328,7 +328,7 @@ class Espii:
                     self.execute_mysql(i,'metadata','db_begin_time_offset,db_end_time_offset, duration, play_offset,sample_begin_time_offset,sample_end_time_offset,time_stamp',
                     (db_begin_time,db_end_time,duration,play_offset,sample_begin_time,sample_end_time,str(timestamp)),self.cursor)
             except mysql.connector.IntegrityError as w:
-                logging.debug('ERROR {} {}'.format(i,w))
+                logging.error('ERROR {} {}'.format(i,w))
                 continue
     def send_artist_names (self):
         for i in range(0, len(self.json_data)):
@@ -339,10 +339,10 @@ class Espii:
                             artist = self.get_artist_name(i,x,y)
                             self.execute_mysql(i,'artist','artist_name',artist,self.cursor)
                         except mysql.connector.IntegrityError as e:
-                            logging.debug('ERROR {} {}'.format(i,e))
+                            logging.error('ERROR {} {}'.format(i,e))
                             continue
             except mysql.connector.ProgrammingError as w:
-                logging.debug('ERROR {} {}'.format(i,w))
+                logging.error('ERROR {} {}'.format(i,w))
                 continue
     def send_track_data (self):
         for i in range(0, len(self.json_data)):
@@ -361,10 +361,10 @@ class Espii:
                         
                         self.execute_mysql(i,'track','title, genre, label, release_date, artist_name, album_name, contributor_name, acrid',(title,genre,label,release_date,artist,album,contributor,acrid),self.cursor)
                     except KeyError as k:
-                        logging.debug('ERROR {} {}'.format(i,k))
+                        logging.error('ERROR {} {}'.format(i,k))
                         continue
             except mysql.connector.IntegrityError as w:
-                logging.debug('ERROR {} {}'.format(i,w))
+                logging.error('ERROR {} {}'.format(i,w))
                 continue
     def send_contributor_data (self):
         for i in range(len(self.json_data)):
@@ -375,16 +375,16 @@ class Espii:
                             contributor = self.get_each_contributors_data(i,x,y)
                             self.execute_mysql(i,'contributors','contributor_name',contributor,self.cursor)
                     except KeyError as k:
-                        logging.debug('ERROR {} {}'.format(i,k))
+                        logging.error('ERROR {} {}'.format(i,k))
                         continue
             except mysql.connector.IntegrityError as err:
-                logging.debug('ERROR {} {}'.format(i,err))
+                logging.error('ERROR {} {}'.format(i,err))
                 continue
     def commit(self):
         self.cnx.commit()
         self.cursor.close()
         self.cnx.close()
-        logging.debug(' data has been commited')
+        logging.info(' data has been commited')
 
 if __name__ == "__main__":
     #print(f'process id of __main__ {os.getpid()}')

@@ -17,7 +17,7 @@ import traceback
 
 reload(sys)
 sys.setdefaultencoding("utf8")
-logging.basicConfig(filename='/var/log/espii/acr.log,level=10', format='%(asctime)s %(levelname)s %(message)s')
+logging.basicConfig(filename='/var/log/espii/acr.log',level=10, format='%(asctime)s %(levelname)s %(message)s')
 
 """
 This demo shows how to use the RESTful API to operate ACRCloud Broadcast Database Monitoring(project, channel, results)
@@ -128,7 +128,7 @@ class Acrcloud_Monitor_API:
         r2 = r.json()
         with open('/var/www/html/espii/src/espii_db/{}.json'.format(channel_name), 'wb') as json_file:
             json.dump(r2, json_file)
-        logging.debug('\033[1;32;40m OK \033[0;37;40m {} channel created successfuly'.format(channel_name))
+        logging.info('{} channel created successfuly'.format(channel_name))
         #return r.text
         
 
@@ -284,8 +284,8 @@ class Acrcloud_Monitor_Demo:
 
 if __name__ == "__main__":
     config = {
-        "account_access_key" : "906ec84f17280273",
-        "account_access_secret" : "ba39546718bf3e8ae69c21866050b2cf",
+        "account_access_key" : "5b17f1453fde570e",
+        "account_access_secret" : "2341cec7ee17047ca37fd4277fb9a702",
     }
 
     ams = Acrcloud_Monitor_Demo(config)
@@ -319,7 +319,7 @@ if __name__ == "__main__":
         for i in range(len(channel_id)):
             ams.channel_results("bald", "{}".format(channel_id[i]),"{}".format(channel_name[i]), ams.get_date_time())
     except Exception as e:
-        logging.debug('\033[1;31;40m ERROR \033[0;37;40m {}'.format(e))
+        logging.error('{}'.format(e))
     
     #ams.res_callback("bald","https://espii.club/platform.php")
     """

@@ -32,7 +32,7 @@ class Espii:
             self.json_data = json.load(self.data)
 
         elif platform.platform()[0:5] == 'Linux':
-            self.data = open('/var/www/html/espii/src/espii_db/{}.json'.format(self.channel_id))
+            self.data = open('/var/www/html/espii/src/espii_db/stations/station_data{}.json'.format(self.channel_id))
             self.json_data = json.load(self.data)
         
         self.run()
@@ -405,11 +405,11 @@ if __name__ == "__main__":
     #print(f'process id of __main__ {os.getpid()}')
     #data = open('/var/www/html/espii/src/espii_db/log.json')
     if platform.platform()[0:5] == "Linux":
-        channels = open('/var/www/html/espii/src/espii_db/channel_list.json')
+        channels = open('/var/www/html/espii/src/espii_db/stations/station_name/channel_list.json')
         try:
             channel_load = json.load(channels)
         except Exception as e:
-            logging.error(f'failed to load channel list: {e}')
+            logging.error('failed to load channel list:{}'.format(e))
             exit()
         channel_list = []
         for i in range(0, len(channel_load)):

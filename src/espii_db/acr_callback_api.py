@@ -73,7 +73,7 @@ class Acrcloud_Monitor_API:
         r = requests.post(requrl, data=data, headers=headers, verify=True)
         #r.encoding = "utf-8"
         r2 = r.json()
-        with open('/var/www/html/espii/src/espii_db/calbk.json', 'wb') as json_file:
+        with open('/var/www/html/espii/src/espii_db/stations/station_name/calbk.json', 'wb') as json_file:
             json.dump(r2, json_file)
 
     def set_state_callback(self, project_name, state_callback_url, post_data_type="json"):
@@ -126,7 +126,7 @@ class Acrcloud_Monitor_API:
         r = requests.get(requrl, params=params, headers=headers, verify=True)
         #r.encoding = "utf-8"
         r2 = r.json()
-        with open('/var/www/html/espii/src/espii_db/{}.json'.format(channel_name), 'wb') as json_file:
+        with open('/var/www/html/espii/src/espii_db/stations/station_data{}.json'.format(channel_name), 'wb') as json_file:
             json.dump(r2, json_file)
         logging.info('{} channel created successfuly'.format(channel_name))
         #return r.text
@@ -303,7 +303,7 @@ if __name__ == "__main__":
         channel_id.append(station_id)
         channel_name.append(newer_station_name)
     try:
-        with open('channel_list.json','w') as ch:
+        with open('/var/www/html/espii/src/espii_db/stations/station_name/channel_list.json','w') as ch:
             json.dump(all_channels, ch)
             logging.info('Channel List created')
     except Exception as e:

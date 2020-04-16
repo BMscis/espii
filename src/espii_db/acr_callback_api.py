@@ -286,19 +286,12 @@ if __name__ == "__main__":
         "account_access_key" : "5b17f1453fde570e",
         "account_access_secret" : "2341cec7ee17047ca37fd4277fb9a702",
     }
-
     ams = Acrcloud_Monitor_Demo(config)
-
     #Get all the projects
     project_list = ams.projects()
-
     #Set State Callback_URL
-    #post_data_type: "json" or "form"
     ams.set_state_callback("bald", "https://espii.club/platform.html", "json")
-
     all_channels = ams.all_project_channels("bald")
-    #channels = open('channel_list.json')
-    #channel_load = json.load(channels)
     channel_id = []
     channel_name = []
     for i in range(0, len(all_channels)):
@@ -309,42 +302,11 @@ if __name__ == "__main__":
         all_channels[i]['stream_name'] = newer_station_name
         channel_id.append(station_id)
         channel_name.append(newer_station_name)
-    with open('channel_list.json','w') as ch:
+    with open('/var/www/html/espii/src/espii_db/channel_list.json','wb') as ch:
         for i in range(len(all_channels)):
             json.dump(all_channels[i], ch)
-            
-
-    #Set Result Callback_URL
-    #send_noresult: True or False
-    #post_data_type: "json" or "form"
-    #result_type: "realtime" or "delay"
-    #logging.debug(ams) 
-    #ams.set_result_callback("bms", "https://espii.club/platform.html", False, "form", "realtime")
     try:
         for i in range(len(channel_id)):
             ams.channel_results("bald", "{}".format(channel_id[i]),"{}".format(channel_name[i]), ams.get_date_time())
     except Exception as e:
         logging.error('{}'.format(e))
-    
-    #ams.res_callback("bald","https://espii.club/platform.php")
-    """
-    project_name = "<your project name>"
-    print ams.all_project_channels(project_name)
-    channel_id = "<acrcloud db channel id>"
-    print ams.channel_info(channel_id)
-    channel_id = "XXXXX"
-    print ams.get_channel_urls(channel_id)
-    add_url_list = ["url1"]
-    print ams.add_channel_urls(channel_id, add_url_list)
-    print ams.get_channel_urls(channel_id)
-    del_url_list = ["url1"]
-    print ams.del_channel_urls(channel_id, del_url_list)
-    access_key = "<your project access_key>"
-    channel_id = "channel_id"
-    record_timestamp = "20191203131312"
-    played_duration = 100
-    fname, fcontent = ams.get_recording(access_key, channel_id, record_timestamp, played_duration)
-    if not fname.endswith("failed"):
-        with open(fname, "wb") as wfile:
-            wfile.write(fcontent)
-    """

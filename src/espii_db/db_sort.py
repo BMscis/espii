@@ -3,6 +3,7 @@ import json
 import time
 import logging
 import platform
+import threading
 import mysql.connector
 from datetime import datetime
 from datetime import timedelta
@@ -14,8 +15,12 @@ logging.basicConfig(filename='/var/log/espii/espii_db.log',level=10, format='%(a
 class Espii:
 
     def __init__(self, user,password,channel_id):
-
-        
+        """
+        This is a database logger, given a user name, password and DB_NAME,
+        Create DB if not exists.
+        Create table if not exist
+        Commit json data into mysql
+        """
         self.user = user
         self.password = password
         self.channel_id = channel_id
@@ -29,7 +34,18 @@ class Espii:
         elif platform.platform()[0:5] == 'Linux':
             self.data = open('/var/www/html/espii/src/espii_db/{}.json'.format(self.channel_id))
             self.json_data = json.load(self.data)
-            
+        
+        self.run()
+    def run(self):
+            self.create_database()
+            self.send_acr_id()
+            self.send_album_name()
+            self.send_timestamp_data()
+            self.send_track_data()
+            self.send_artist_names()
+            self.send_metadata()
+            self.send_contributor_data()
+            self.commit()
     def create_database (self):
         DB_NAME = str(self.channel_id)
         TABLES = {}
@@ -142,7 +158,6 @@ class Espii:
                     logging.error('{} failed to create table: {}'.format(table_name,err.msg))
             else:
                 logging.info('{} table created successfuly'.format(table_name))
-
     def execute_mysql (self,i,table_name, columns,values,cursor):
         if type(values) == tuple :
             add_data="INSERT INTO {}({}) VALUES{}".format(table_name,columns,values)
@@ -159,7 +174,6 @@ class Espii:
         result = cursor.fetchall()
         #checker = int(len(result))
         #print(result)
-    
     def get_acrid_data(self,i,x):
         acrid = self.json_data[i]['metadata']['music'][x]['acrid']
         acrid_ = json.dumps(acrid)
@@ -276,7 +290,6 @@ class Espii:
         artist_name_ = json.dumps(artist_name)
 
         return artist_name_
-
     def send_acr_id (self):
         for i in range(0, len(self.json_data)):
             try:
@@ -401,16 +414,6 @@ if __name__ == "__main__":
         for channel in channel_list:
             handler = Espii('root','Meddickmeddick6',channel)
 
-            handler.create_database()
-
-            handler.send_acr_id()
-            handler.send_album_name()
-            handler.send_timestamp_data()
-            handler.send_track_data()
-            handler.send_artist_names()
-            handler.send_metadata()
-            handler.send_contributor_data()
-            handler.commit()
     elif platform.platform()[0:7] == "Windows":
         start = time.perf_counter()
         channels = open('C:/Users/melvi/channel_list.json')
@@ -418,47 +421,7 @@ if __name__ == "__main__":
         channel_list = []
         for i in range(0, len(channel_load)):
             station_name = channel_load[i]['stream_name']
-            new_station_name = station_name.replace(" ","_")
             channel_list.append(new_station_name)
         processes = []
         for channel in channel_list:
             handler = Espii('root','Meddickmeddick6',channel)
-            #p1 = Process(target=handler.create_database())
-            #p2 = Process(target=handler.send_acr_id())
-            #p3 = Process(target=handler.commit())
-
-            #processes.append(p1)
-            #processes.append(p2)
-            #processes.append(p3)
-            handler.create_database()
-
-            handler.send_acr_id()
-            handler.send_album_name()
-            handler.send_timestamp_data()
-            handler.send_track_data()
-            handler.send_artist_names()
-            handler.send_metadata()
-            handler.send_contributor_data()
-            handler.commit()
-            #p2 = multiprocessing.Process(target=handler.send_album_name)
-            #handler.search_mysql('acrid','track','artist_name','Ed Sheeran',handler.cursor)    
-            #for i in ans:
-            #   print(ans)
-            #handler.search_mysql('timestamp','time_stamp','artist_name','Ed Sheeran',handler.cursor)    
-            #p3 = multiprocessing.Process(target=handler.commit)
-            #p1.start()
-            #p2.start()
-            #p3.start()
-            #print(f'process id of __main__ {p1.pid}')
-            #print(f'process id of __p1__ {p2.pid}')
-            #print(f'process id of __p2__ {p3.pid}')
-            #p2.start()
-            #p3.start()
-            #processes.append(p,p2,p3)
-
-        #for process in processes:
-        #p1.join()
-        #p2.join()
-        #p3.join()
-        #stop = time.perf_counter()
-        #print(f'finished in {round(stop-start,2)} seconds')

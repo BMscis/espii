@@ -406,7 +406,11 @@ if __name__ == "__main__":
     #data = open('/var/www/html/espii/src/espii_db/log.json')
     if platform.platform()[0:5] == "Linux":
         channels = open('/var/www/html/espii/src/espii_db/channel_list.json')
-        channel_load = json.load(channels)
+        try:
+            channel_load = json.load(channels)
+        except Exception as e:
+            logging.error(f'failed to load channel list: {e}')
+            exit()
         channel_list = []
         for i in range(0, len(channel_load)):
             station_name = channel_load[i]['stream_name']

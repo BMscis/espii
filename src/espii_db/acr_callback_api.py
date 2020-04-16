@@ -302,9 +302,12 @@ if __name__ == "__main__":
         all_channels[i]['stream_name'] = newer_station_name
         channel_id.append(station_id)
         channel_name.append(newer_station_name)
-    with open('/var/www/html/espii/src/espii_db/channel_list.json','wb') as ch:
-        for i in range(len(all_channels)):
-            json.dump(all_channels[i], ch)
+    try:
+        with open('channel_list.json','w') as ch:
+            json.dump(all_channels, ch)
+            logging.info('Channel List created')
+    except Exception as e:
+        logging.error('channel list error : {}'.format(e))
     try:
         for i in range(len(channel_id)):
             ams.channel_results("bald", "{}".format(channel_id[i]),"{}".format(channel_name[i]), ams.get_date_time())

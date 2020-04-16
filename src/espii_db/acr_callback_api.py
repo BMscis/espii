@@ -242,9 +242,8 @@ class Acrcloud_Monitor_Demo:
                 page_num += 1
             #print "Project:{0}, Total number of channels: {1}".format(project_name, len(stream_list))
         except Exception as e:
-            traceback.print_exc()
-        with open('channel_list.json', 'w') as ch:
-            json.dump(stream_list, ch)
+            traceback.print_exc(e)
+        
         return stream_list
 
     def channel_info(self, channel_id):
@@ -298,16 +297,22 @@ if __name__ == "__main__":
     ams.set_state_callback("bald", "https://espii.club/platform.html", "json")
 
     all_channels = ams.all_project_channels("bald")
-    channels = open('channel_list.json')
-    channel_load = json.load(channels)
+    #channels = open('channel_list.json')
+    #channel_load = json.load(channels)
     channel_id = []
     channel_name = []
-    for i in range(0, len(channel_load)):
-        station_id = channel_load[i]['id']
-        station_name = channel_load[i]['stream_name']
+    for i in range(0, len(all_channels)):
+        station_id = all_channels[i]['id']
+        station_name = all_channels[i]['stream_name']
         new_station_name = station_name.replace(" ","_")
+        newer_station_name = new_station_name.replace(".","_")
+        all_channels[i]['stream_name'] = newer_station_name
         channel_id.append(station_id)
-        channel_name.append(new_station_name)
+        channel_name.append(newer_station_name)
+    with open('channel_list.json','ra+') as ch:
+        for i in range(len(all_channels)):
+            json.dump(all_channels[i], ch)
+            
 
     #Set Result Callback_URL
     #send_noresult: True or False

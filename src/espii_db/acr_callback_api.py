@@ -309,7 +309,7 @@ if __name__ == "__main__":
         all_channels[i]['stream_name'] = newer_station_name
         channel_id.append(station_id)
         channel_name.append(newer_station_name)
-    with open('channel_list.json','ra+') as ch:
+    with open('channel_list.json','w') as ch:
         for i in range(len(all_channels)):
             json.dump(all_channels[i], ch)
             

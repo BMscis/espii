@@ -32,7 +32,7 @@ class Espii:
             self.json_data = json.load(self.data)
 
         elif platform.platform()[0:5] == 'Linux':
-            self.data = open('/var/www/html/espii/src/espii_db/stations/station_data{}.json'.format(self.channel_id))
+            self.data = open('/var/www/html/espii/src/espii_db/stations/station_data/{}.json'.format(self.channel_id))
             self.json_data = json.load(self.data)
         
         self.run()

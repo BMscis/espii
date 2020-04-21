@@ -278,7 +278,7 @@ class Acrcloud_Monitor_Demo:
 
     def get_date_time(self):
         date_time = datetime.date.today()
-        date_ = date_time - timedelta(days=4)
+        date_ = date_time - timedelta(days=3)
         date = date_.strftime("%Y%m%d")
         
         return date

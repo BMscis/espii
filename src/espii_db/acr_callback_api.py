@@ -284,8 +284,8 @@ class Acrcloud_Monitor_Demo:
 
 if __name__ == "__main__":
     config = {
-        "account_access_key" : "5b17f1453fde570e",
-        "account_access_secret" : "2341cec7ee17047ca37fd4277fb9a702",
+        "account_access_key" : "26a1f61d05871fe5",
+        "account_access_secret" : "f5273b8a4198970351d7ccfc5915a851",
     }
 
     ams = Acrcloud_Monitor_Demo(config)

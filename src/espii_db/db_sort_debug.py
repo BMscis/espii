@@ -11,7 +11,7 @@ from multiprocessing import Process
 from mysql.connector import errorcode
 from mysql.connector import errorcode
 
-logging.basicConfig(filename='/var/log/espii/espii_db.log',level=10, format='%(asctime)s %(levelname)s %(message)s')
+logging.basicConfig(level=10, format='%(asctime)s %(levelname)s %(message)s')
 class Espii:
 
     def __init__(self, user,password,channel_id):
@@ -165,7 +165,7 @@ class Espii:
             add_data="INSERT INTO %s(%s) VALUES(%s)" %(table_name,columns,values)
         cursor.execute(add_data)
         #cursor = 0
-        logging.info('{} OK {}'.format(i,add_data))
+        #logging.info('{} OK {}'.format(i,add_data))
     def search_mysql (self,query_column,table_name, anchor_column, value,cursor):
         search_data="SELECT %s FROM %s WHERE %s = \"%s\"" % (query_column,table_name,anchor_column,value)
         #val = "%s" % value
@@ -385,11 +385,11 @@ class Espii:
                         album = self.get_album_data(i,x)
                         contributor = self.get_all_contributors_data(i,x)                        
                         self.execute_mysql(i,'track','title, genre, label, release_date, artist_name, album_name, contributor_name, acrid',(title,genre,label,release_date,artist,album,contributor,acrid),self.cursor)
-                    except KeyError as w:
+                    except Exception as w:
                         logging.error(f'STR: {i}:{x}-->{w}')
                         continue
             except Exception as e:
-                logging.error(f'STR: {i}:{x}-->{e}')
+                logging.error(f'STR: {i}-->{e}')
                 continue
     def send_contributor_data (self):
         for i in range(len(self.json_data)):
@@ -418,6 +418,7 @@ class Espii:
 if __name__ == "__main__":
     #print(f'process id of __main__ {os.getpid()}')
     #data = open('/var/www/html/espii/src/espii_db/log.json')
+    """
     if platform.platform()[0:5] == "Linux":
         channels = open('/var/www/html/espii/src/espii_db/stations/station_name/channel_list.json')
         try:
@@ -442,4 +443,6 @@ if __name__ == "__main__":
             channel_list.append(station_name)
         processes = []
         for channel in channel_list:
-            handler = Espii('root','Meddickmeddick6',channel)
+            """
+channel = 'log6'
+handler = Espii('root','Meddickmeddick6',channel)

@@ -165,7 +165,7 @@ class Espii:
             add_data="INSERT INTO %s(%s) VALUES(%s)" %(table_name,columns,values)
         cursor.execute(add_data)
         #cursor = 0
-        logging.info('{} OK {}'.format(i,add_data))
+        #logging.info('{} OK {}'.format(i,add_data))
     def search_mysql (self,query_column,table_name, anchor_column, value,cursor):
         search_data="SELECT %s FROM %s WHERE %s = \"%s\"" % (query_column,table_name,anchor_column,value)
         #val = "%s" % value
@@ -385,11 +385,11 @@ class Espii:
                         album = self.get_album_data(i,x)
                         contributor = self.get_all_contributors_data(i,x)                        
                         self.execute_mysql(i,'track','title, genre, label, release_date, artist_name, album_name, contributor_name, acrid',(title,genre,label,release_date,artist,album,contributor,acrid),self.cursor)
-                    except KeyError as w:
+                    except Exception as w:
                         logging.error(f'STR: {i}:{x}-->{w}')
                         continue
             except Exception as e:
-                logging.error(f'STR: {i}:{x}-->{e}')
+                logging.error(f'STR: {i}-->{e}')
                 continue
     def send_contributor_data (self):
         for i in range(len(self.json_data)):

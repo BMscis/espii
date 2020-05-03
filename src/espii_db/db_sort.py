@@ -299,10 +299,10 @@ class Espii:
                         title = self.get_title_data(i,x)
                         self.execute_mysql(i,'acr_id','acrid, title',(acrid,title),self.cursor)
                     except Exception as w:
-                        logging.error(f'SACRID: {i}:{x}-->{w}')
+                        logging.error('SACRID: {}:{}-->{}'.format(i,x,w))
                         continue
             except Exception as e:
-                logging.error(f'SACRID: {i}-->{e}')
+                logging.error('SACRID: {}-->{}'.format(i,e))
                 continue
     def send_album_name (self):
         for i in range(0, len(self.json_data)):
@@ -312,10 +312,10 @@ class Espii:
                         album = self.get_album_data(i,x)
                         self.execute_mysql(i,'album','album_name',album,self.cursor)
                     except Exception as w:
-                        logging.error(f'SALBUM: {i}:{x}-->{w}')
+                        logging.error('SALBUM: {}:{}-->{}'.format(i,x,w))
                         continue
             except Exception as e:
-                logging.error(f'SALBUM: {i}-->{e}')                  
+                logging.error('SALBUM: {}-->{}'.format(i,e))                  
                 continue
     def send_timestamp_data (self):
         for i in range(0, len(self.json_data)):
@@ -328,10 +328,10 @@ class Espii:
                         acrid = self.get_acrid_data(i,x)
                         self.execute_mysql(i,'time_stamp','timestamp, played_duration, score, acrid',(str(timestamp),played_duration,score,acrid),self.cursor)
                     except Exception as w:
-                        logging.error(f'STS: {i}:{x}-->{w}')
+                        logging.error('STS: {}:{}-->{}'.format(i,x,w))
                         continue
             except Exception as e:
-                logging.error(f'STS: {i}-->{e}')
+                logging.error('STS: {}-->{}'.format(i,e))
                 continue
     def send_metadata (self):
         for i in range(0, len(self.json_data)):
@@ -348,9 +348,9 @@ class Espii:
                         self.execute_mysql(i,'metadata','db_begin_time_offset,db_end_time_offset, duration, play_offset,sample_begin_time_offset,sample_end_time_offset,time_stamp',
                     (db_begin_time,db_end_time,duration,play_offset,sample_begin_time,sample_end_time,str(timestamp)),self.cursor)
                     except Exception as w:
-                        logging.error(f'SMT: {i}:{x}-->{w}')
+                        logging.error('SMT: {}:{}-->{}'.format(i,x,w))
             except Exception as e:
-                logging.error(f'SMT: {i}-->{e}')
+                logging.error('SMT: {}-->{}'.format(i,e))
                 continue
     def send_artist_names (self):
         for i in range(0, len(self.json_data)):
@@ -362,13 +362,13 @@ class Espii:
                                 artist = self.get_artist_name(i,x,y)
                                 self.execute_mysql(i,'artist','artist_name',artist,self.cursor)
                             except Exception as v:
-                                logging.error(f'SAR: {i}:{x}:{y}-->{v}')
+                                logging.error('SAR: {}:{}:{}-->{}'.format(i,x,y,v))
                                 continue
                     except Exception as w:
-                        logging.error(f'SAR: {i}:{x}-->{w}')
+                        logging.error('SAR: {}:{}-->{}'.format(i,x,w))
                         continue
             except Exception as e:
-                logging.error(f'SAR: {i}-->{e}')
+                logging.error('SAR: {}-->{}'.format(i,e))
                 continue
     def send_track_data (self):
         for i in range(0, len(self.json_data)):
@@ -386,10 +386,10 @@ class Espii:
                         contributor = self.get_all_contributors_data(i,x)                        
                         self.execute_mysql(i,'track','title, genre, label, release_date, artist_name, album_name, contributor_name, acrid',(title,genre,label,release_date,artist,album,contributor,acrid),self.cursor)
                     except Exception as w:
-                        logging.error(f'STR: {i}:{x}-->{w}')
+                        logging.error('STR: {}:{}-->{}'.format(i,x,w))
                         continue
             except Exception as e:
-                logging.error(f'STR: {i}-->{e}')
+                logging.error('STR: {}-->{}'.format(i,e))
                 continue
     def send_contributor_data (self):
         for i in range(len(self.json_data)):
@@ -401,13 +401,13 @@ class Espii:
                                 contributor = self.get_each_contributors_data(i,x,y)
                                 self.execute_mysql(i,'contributors','contributor_name',contributor,self.cursor)
                             except Exception as v:
-                                logging.error(f'SCR: {i}:{x}:{y}-->{v}')
+                                logging.error('SCR: {}:{}:{}-->{}'.format(i,x,y,v))
                                 continue
                     except Exception as w:
-                        logging.error(f'SCR: {i}:{x}-->{w}')
+                        logging.error('SCR: {}:{}-->{}'.format(i,x,w))
                         continue
             except Exception as e:
-                logging.error(f'SCR: {i}-->{e}')
+                logging.error('SCR: {}-->{}'.format(i,e))
                 continue
     def commit(self):
         self.cnx.commit()
@@ -416,7 +416,7 @@ class Espii:
         logging.info(' data has been commited')
 
 if __name__ == "__main__":
-    #print(f'process id of __main__ {os.getpid()}')
+    #print('process id of __main__ {os.getpid()}')
     #data = open('/var/www/html/espii/src/espii_db/log.json')
     if platform.platform()[0:5] == "Linux":
         channels = open('/var/www/html/espii/src/espii_db/stations/station_name/channel_list.json')

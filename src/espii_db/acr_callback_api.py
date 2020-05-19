@@ -285,8 +285,8 @@ class Acrcloud_Monitor_Demo:
 
 if __name__ == "__main__":
     config = {
-        "account_access_key" : "26a1f61d05871fe5",
-        "account_access_secret" : "f5273b8a4198970351d7ccfc5915a851",
+        "account_access_key" : "64b4fb716f3d7b0b",
+        "account_access_secret" : "d322100def4a7cef0ad81ad7f0b87953",
     }
     ams = Acrcloud_Monitor_Demo(config)
     #Get all the projects

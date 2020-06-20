@@ -13,11 +13,17 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 module.exports = {
     context: path.resolve(__dirname,'src'),
     entry: {
-        profile: ['./app-profile/app.js','./app-profile/app.scss'],
-        login: ['./app-login/gin.js','./app-login/gin.scss'],
-        user: ['./app-signup/er.js','./app-signup/er.scss'],
-        signup: ['./app-signup/up.js','./app-signup/Aup.js','./app-signup/up.scss'],
-        platform: ['./app-platform/arc.js','./_common.scss']
+      scss:[
+        "./app-platform/scss/plyr.scss",
+        "./app-platform/scss/_BuildingBlocks.scss",
+        "./app-platform/scss/_ButtonControl.scss",
+        "./app-platform/scss/_DimentionBlocks.scss",
+        "./app-platform/scss/_GridBlocks.scss",
+        "./app-platform/scss/_ImageControl.scss",
+        "./app-platform/scss/_PaddingBlocks.scss",
+        "./app-platform/scss/_StyleBlocks.scss"
+      ],
+        platform: ['./app-platform/arc.js']
     },
     plugins: [
         //new ManifestPlugin(),
@@ -35,39 +41,9 @@ module.exports = {
           ignoreOrder: false,
         }),
         new HtmlWebpackPlugin({
-            title: 'login',
-            filename: 'index.html',
-            template: './app-login/login.html'
-          }),
-          new HtmlWebpackPlugin({
-            title: 'home',
-            filename: 'home.html',
-            template: './app-profile/arc.html'
-          }),
-          new HtmlWebpackPlugin({
-            title: 'login-signup',
-            filename: 'login-signup.html',
-            template: './app-signup/login-signup.html'
-          }),
-          new HtmlWebpackPlugin({
-            title: 'business-artist',
-            filename: 'business-artist.html',
-            template: './app-signup/business-artist.html'
-          }),
-          new HtmlWebpackPlugin({
-            title: 'business',
-            filename: 'business.html',
-            template: './app-signup/business.html'
-          }),
-          new HtmlWebpackPlugin({
-            title: 'artist',
-            filename: 'artist.html',
-            template: './app-signup/artist.html'
-          }),
-          new HtmlWebpackPlugin({
-            title: 'platform',
-            filename: 'platform.html',
-            template: './app-platform/platform.html'
+            title: 'index',
+            filename: 'index.jsp',
+            template: './app/index.html'
           }),
           new WebpackPwaManifest({
             name: 'espii club',
@@ -101,8 +77,8 @@ module.exports = {
     ],
     output: {
         filename: '[name].[contenthash].js',
-        path: path.resolve(__dirname,'dist'),
-        publicPath: '/',
+        path: path.resolve("C:/Users/melvi/eclipse-workspace/x64/espii/WebContent"),
+        publicPath: '',
     },
     module: {
         rules: [

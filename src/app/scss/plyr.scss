@@ -1,0 +1,68 @@
+@use "./BuildingBlocks";
+@import "./BuildingBlocks";
+::-webkit-scrollbar{
+  display: none;
+}
+head{
+  @include BuildingBlocks.HEADBLOCK;
+}
+script{
+  @include BuildingBlocks.HEADBLOCK;
+}
+html{
+  @include BuildingBlocks.HTMLBLOCK;
+}
+title{}
+body{
+  @include BuildingBlocks.BODYBLOCK;
+}
+.left{
+  @include BuildingBlocks.LEFTBLOCK;
+}
+.vr{}
+.center{
+  @include BuildingBlocks.CENTERBLOCK;
+  .search{
+    @include BuildingBlocks.SEARCHBLOCK;
+  }
+  hr{
+
+  }
+  .centralbar{
+    @include BuildingBlocks.BARBLOCK;
+  }
+  .webpointer{
+    position: absolute;
+    right: 1px;
+  }
+  .wallet{
+    @include BuildingBlocks.WALLETBLOCK;
+  }
+  .titlebar{
+    @include BuildingBlocks.TITLEBLOCK;
+  }
+  hr{
+  }
+  .tablecontainer{
+    @include BuildingBlocks.CONTAINERBLOCK;
+  }
+}
+.right{
+  @include BuildingBlocks.RIGHTBLOCK;
+  .notifications{
+
+  }
+  hr{
+
+  }
+  .dropdown{
+    p{
+      
+    }
+  }
+}
+
+
+
+
+

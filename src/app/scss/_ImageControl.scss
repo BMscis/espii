@@ -1,0 +1,7 @@
+@use "./DimentionBlocks";
+@mixin IMAGECONTROLLER {
+    @include DimentionBlocks.FITCONTENT;
+    .capital-logo{
+        background-color:red;
+    }
+}

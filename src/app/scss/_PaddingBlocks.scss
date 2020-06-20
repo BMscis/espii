@@ -1,0 +1,20 @@
+@mixin MICROPAD {
+    padding: 0;
+    margin: 0;
+}
+@mixin MINIPAD {
+    padding: 0.5pc;
+    margin: 0;
+}
+@mixin CARDPAD {
+    padding: 0.5pc;
+    margin:  0 1pc 0 0;
+}
+@mixin PAD {
+    padding: 1pc;
+    margin: 0;
+}
+@mixin MACROPAD {
+    padding: 2pc;
+    margin: 0;
+}

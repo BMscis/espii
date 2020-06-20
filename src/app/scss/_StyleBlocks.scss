@@ -1,0 +1,95 @@
+$color:(
+    "tetiary":#aa6378,
+    "primary":#70271A,
+    "secondary":#1a6378
+    );
+$box-shadow:(
+    "in":inset 0 2px 8px 0 rgba(0, 0, 0, 0.2),
+    "out":2px -2px 8px 0 rgba(0, 0, 0, 0.2),
+    "sec":2px -2px 8px 0 rgba(0, 0, 0, 0.2)
+    );
+$border-radius: ("one":0.5pc,"two":1pc);
+$linear-gradient:linear-gradient(45deg, #1a6378, #70271A);
+*{
+    box-sizing: border-box;
+}
+@mixin HTMLSTYLE {
+    font-family: monospace;
+    color:black;
+    font-size: 12px;
+    transition: 0.5s ease;
+    overflow: hidden;
+}
+@mixin NOSTYLE {
+    display: none;
+}
+@mixin INPUTSTYLE {
+    outline: -webkit-focus-ring-color auto 1px;
+}
+@mixin LINESTYLE {
+    opacity: 35%;
+    border-left-style:groove ;
+}
+@mixin BUTTONSTYLE {
+    button{
+        outline: none;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        transition: 0.3s ease;
+        border-radius: 2pc;
+    }
+    button:hover{
+        transform: scale(1.3);
+    }
+}
+@mixin SCROLLSTYLE {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+@mixin CAROUSELSTYLE {
+    align-items: stretch;
+}
+@mixin DIVSTYLE {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+@mixin HOLDERSTYLE {
+    display: flex;
+}
+@mixin ANCHORSTYLE {
+    display: none;
+    align-items: center;
+    background-color: #0000000f;
+    border-radius:map-get($border-radius,"two");
+    box-shadow: map-get($box-shadow,"out");
+    a {
+        font-size: 24px;
+        text-decoration: none;
+        color: black;
+    }
+    a:hover{
+        background-color: #0000003b;
+    }
+}
+@mixin IMAGESTYLE{
+    background-image: $linear-gradient;
+    border-radius: map-get($border-radius,"two");
+    box-shadow: map-get($box-shadow,"out");
+}
+@mixin WALLETSTYLE {
+    box-shadow: map-get($box-shadow,"in");
+    border-radius: map-get($border-radius,"two");
+    .cards{
+        box-shadow: map-get($box-shadow,"out");
+        border-radius: map-get($border-radius,"two");
+    }
+}
+@mixin TITLESTYLE {
+    border-bottom-style:groove;
+}
+@mixin TABSTYLE {
+    border-bottom-style:inset;
+}

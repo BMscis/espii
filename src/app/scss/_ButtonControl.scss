@@ -1,0 +1,56 @@
+@use "./DimentionBlocks";
+@use "./StyleBlocks";
+$tetiary-color:#aa6378;
+$primary-color:#70271A;
+$secondary-color:#1a6378;
+$border-radius: 2pc;
+
+@mixin ALLBUTTONS {
+
+    @include StyleBlocks.BUTTONSTYLE;
+    .home{
+        @include HOMEBUTTON();
+    }
+    .menu{
+        @include MENUBUTTON();
+    }
+    .notifications{
+        @include NOTIFICATIONBUTTON();
+    }
+    .tabpocket{
+        .active{
+            @include ACTIVE();
+        }
+        .inactive{
+            @include INACTIVE();
+        }
+    }
+}
+@mixin HOMEBUTTON{
+    background-color: $secondary-color;
+    color: white;
+    @media screen and (max-width:900px){
+        align-self: center;
+        position: absolute;
+    }
+}
+@mixin MENUBUTTON{
+    @media screen and (max-width:900px){
+        align-self: flex-start;
+        position: absolute;
+    }
+}
+@mixin NOTIFICATIONBUTTON{
+    @media screen and (max-width:900px){
+        align-self: flex-end;
+        position: absolute;
+    }
+}
+@mixin ACTIVE{
+    display: flex;
+    position: relative;
+}
+@mixin INACTIVE {
+    display: none;
+    position: absolute;
+}

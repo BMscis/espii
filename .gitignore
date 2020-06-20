@@ -7,3 +7,9 @@ src/espii_db/dbtest.py
 src/espii_db/lorgy.py
 src/espii_db/new_db_sort.py
 src/espii_db/playlist_view.sql
+src/espii_db/at.py
+
+src/espii_db/db_debug_thread.py
+src/espii_db/forking.py
+src/espii_db/hash_db.py
+src/espii_db/*.json

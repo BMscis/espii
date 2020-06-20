@@ -1,0 +1,189 @@
+@use "./GridBlocks";
+@use "./PaddingBlocks";
+@use "./StyleBlocks";
+@use "./DimentionBlocks";
+@use "./ButtonControl";
+@use "./ImageControl";
+
+@import "./ButtonControl";
+@import "./CreativeBlocks";
+@import "./DimentionBlocks";
+@import "./GridBlocks";
+@import "./ImageControl";
+@import "./ImageControl";
+@import "./PaddingBlocks";
+@import "./StyleBlocks";
+
+@mixin HEADBLOCK {
+    @include StyleBlocks.NOSTYLE;
+}
+@mixin HTMLBLOCK {
+    @include GridBlocks.ROOT;
+    @include DimentionBlocks.SCROLLAVAILABLE;
+    @include PaddingBlocks.MICROPAD;
+    @include StyleBlocks.HTMLSTYLE;
+}
+@mixin BODYBLOCK {
+    @include GridBlocks.ROOT;
+    @include DimentionBlocks.SCROLLAVAILABLE;
+    @include PaddingBlocks.MINIPAD;
+    @include ButtonControl.ALLBUTTONS;
+}
+@mixin SIDEBLOCK {
+    @include DimentionBlocks.BCONTENT;
+    .notifications-dropdown{
+        @include DROPDOWNBLOCK();
+    }
+    .menu-dropdown{
+        @include DROPDOWNBLOCK();
+    }
+    @media screen and (min-width:900px){
+        @include PaddingBlocks.MINIPAD;
+    }
+    @media screen and (max-width:900px){
+        @include StyleBlocks.NOSTYLE;
+    }
+}
+@mixin LEFTBLOCK {
+    @include SIDEBLOCK();
+    @include GridBlocks.ColumnStart;
+    .open{
+        @include GridBlocks.ColumnCenter;
+        display: flex;
+    }
+}
+@mixin RIGHTBLOCK {
+    @include SIDEBLOCK();
+    @include GridBlocks.ColumnEnd;
+    .open{
+        @include GridBlocks.ColumnCenter;
+        display: flex;
+    }
+}
+@mixin CENTERBLOCK {
+    @include GridBlocks.ColumnCenter;
+    @media screen and (min-width:900px){
+        @include DimentionBlocks.SHCONTENT;
+    }
+    @media screen and (max-width:900px){
+        @include DimentionBlocks.SCROLLCONTENT;
+    }
+}
+@mixin SEARCHBLOCK {
+    @include GridBlocks.ColumnCenter;
+    @include DimentionBlocks.SCONTENT;
+    @include PaddingBlocks.MINIPAD;
+    @include StyleBlocks.IMAGESTYLE;
+    input{
+        @include StyleBlocks.INPUTSTYLE;
+    }
+
+}
+@mixin BARBLOCK{
+    @media screen and (min-width:900px){
+        @include StyleBlocks.NOSTYLE;
+    }
+    @media screen and (max-width:900px){
+        @include GridBlocks.ColumnCenter;
+        @include DimentionBlocks.TCONTENT;
+        @include PaddingBlocks.MINIPAD;
+        .notifications-dropdown{
+            @include DROPDOWNBLOCK();
+        }
+        .menu-dropdown{
+            @include DROPDOWNBLOCK();
+        }
+        .open{
+            @include GridBlocks.ColumnCenter;
+            display: flex;
+        }
+    }
+}
+@mixin DROPDOWNBLOCK {
+    @include StyleBlocks.NOSTYLE;
+    @include PaddingBlocks.MINIPAD;
+    @include DimentionBlocks.ECONTENT;
+    @include StyleBlocks.ANCHORSTYLE;
+
+}
+@mixin WALLETBLOCK {
+    @include GridBlocks.RowStart;
+    @include PaddingBlocks.MINIPAD;
+    @include DimentionBlocks.MHTCONTENT;
+    @include StyleBlocks.SCROLLSTYLE;
+    @include StyleBlocks.WALLETSTYLE;
+    >.cards{
+        @include CARDBLOCK();
+    }
+}
+@mixin CARDBLOCK {
+    @include GridBlocks.RowStart;
+    @include DimentionBlocks.FITCONTENT;
+    @include PaddingBlocks.CARDPAD;
+    @include ImageControl.IMAGECONTROLLER;
+}
+@mixin  TITLEBLOCK {
+    @include GridBlocks.RowStart;
+    @include DimentionBlocks.TCONTENT;
+    @include PaddingBlocks.MINIPAD;
+    @include StyleBlocks.TITLESTYLE;
+    div{
+        @include DIVBLOCK();
+    }
+    
+}
+@mixin DIVBLOCK {
+    @include GridBlocks.RowStart;
+    @include DimentionBlocks.DCONTENT;
+    @include PaddingBlocks.MINIPAD;
+    @include StyleBlocks.DIVSTYLE;
+}
+
+@mixin CONTAINERBLOCK{
+    @include GridBlocks.RowStart;
+    @include DimentionBlocks.FILLAVAILABLE;
+    @include PaddingBlocks.MICROPAD;
+    @include StyleBlocks.SCROLLSTYLE;
+    .tables{
+        @include TABLEBLOCK();
+    }
+    .hide{
+        display: none;
+    }
+    .unhide{
+        display: flex;
+    }
+}
+@mixin TABLEBLOCK {
+    @include GridBlocks.ColumnStart;
+    @include DimentionBlocks.MWTCONTENT;
+    @include PaddingBlocks.MINIPAD;
+    .tab{
+        @include TABBLOCK();
+    }
+}
+@mixin TABBLOCK {
+    @include GridBlocks.RowStart;
+    @include DimentionBlocks.TCONTENT;
+    @include PaddingBlocks.MICROPAD;
+    @include StyleBlocks.TABSTYLE;
+    div{
+        @include DIVBLOCK();
+    }
+
+    .holder{
+        @include DIVBLOCK();
+        @include StyleBlocks.HOLDERSTYLE;
+        .tabpocket{
+            @include POCKETBLOCK();
+            .popup{
+                display: none;
+            }
+        }
+    }
+}
+@mixin POCKETBLOCK {
+    @include GridBlocks.RowStart;
+    @include DimentionBlocks.FITCONTENT;
+    @include PaddingBlocks.MICROPAD;
+}

@@ -1,0 +1,52 @@
+@mixin FITCONTENT{
+    width: fit-content;
+    height: fit-content;
+}
+@mixin FILLAVAILABLE{
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
+@mixin SCROLLAVAILABLE{
+    width: -webkit-fill-available;
+    height: 100%;
+}
+@mixin TCONTENT{
+    width: 100%;
+    height: fit-content;
+}
+@mixin MHTCONTENT{
+    width: 100%;
+    min-height: fit-content;
+}
+@mixin SCROLLCONTENT{
+    width: 100%;
+    height: 100%;
+}
+@mixin MWTCONTENT{
+    min-width: 100%;
+    height: 100%;
+}
+@mixin NCONTENT{
+    width: 95%;
+    height: fit-content;
+}
+@mixin ECONTENT{
+    width: 80%;
+    height: fit-content;
+}
+@mixin SCONTENT{
+    width: 60%;
+    height: fit-content;
+}
+@mixin SHCONTENT{
+    width: 60%;
+    height: 100%;
+}
+@mixin DCONTENT{
+    width:25%;
+    height: 40px;
+}
+@mixin BCONTENT{
+    width:20%;
+    height: fit-content;
+}

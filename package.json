@@ -27,7 +27,7 @@
     "extract-loader": "^3.1.0",
     "fibers": "^4.0.2",
     "file-loader": "^4.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "material-components-web": "^4.0.0",
     "mini-css-extract-plugin": "^0.8.0",
     "mysql": "github:felixge/node-mysql",
